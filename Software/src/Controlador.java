@@ -1,8 +1,5 @@
 import graficos.Pantalla;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class Controlador {
     
     public static void main(String[] args) throws Exception {
@@ -13,15 +10,21 @@ public class Controlador {
         //Pantalla de inicio
         pantalla.pantallaInicio();
         
-        pantalla.btt_start.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                pantalla.cambiarSprite(); 
-            }
-        });
- 
+        //Espero a que pulse
+        while(!pantalla.continuar()){
+            Thread.sleep(100);
+        }
         
+        pantalla.pantallaSeleccionDePersonaje();
 
+        //Espero a que seleccione el personaje
+        while(!pantalla.continuar()){
+            Thread.sleep(100);
+        }
+
+        System.out.println("ATRIBUTOS");
+
+        pantalla.pantallaSeleccionAtributos();
     }
-
 }
 
