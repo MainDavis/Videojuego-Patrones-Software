@@ -170,7 +170,6 @@ public class Pantalla extends JFrame{
                 puntosAtributos--;
                 stats[0]++;
                 lb_stats[0].setText(Integer.toString(stats[0]));
-                //Actualizo el boton
                 actualizarBtt_select();
             }
         });
@@ -299,7 +298,6 @@ public class Pantalla extends JFrame{
 
     public void actualizarBtt_select(){
         System.out.println("["+ puntosAtributos +"]");
-        //Actualizo el boton
         if(puntosAtributos==0){
             btt_select.setText("Comenzar");
             btt_select.setEnabled(true);
