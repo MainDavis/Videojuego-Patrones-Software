@@ -61,7 +61,7 @@ public class Pantalla extends JFrame{
     public void pantallaInicio(){
         
         btt_start = new JButton();
-        btt_start.setBounds(303, 299, 294,102);
+        btt_start.setBounds(500, 299, 294,102);
         btt_start.setIcon(btt_inicio);
         btt_start.setBorderPainted(false); 
         btt_start.setContentAreaFilled(false); 
