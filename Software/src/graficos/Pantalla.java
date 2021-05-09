@@ -34,6 +34,7 @@ public class Pantalla extends JFrame{
     private JButton btt_atributos[][] = new JButton[5][2]; //[Estadistica][add/rmv]
     //Variables
     private int Npersonaje = 0;
+    private int Nmapa;
     private boolean continuar = false;
     private int puntosAtributos = 5;
     private int stats[] = new int[5];
@@ -258,11 +259,16 @@ public class Pantalla extends JFrame{
                 actualizarBtt_select();
             }
         });
+        //Boton seleccionar
+        btt_atributos[4][1].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                continuar=true;
+            }
+        });
         
-
+        //Modifico el botón de seleccionar
         btt_select.setEnabled(false);
         btt_select.setText("Tienes 5");
-        
 
         //Añado en orden
         this.add(pj);
@@ -297,7 +303,6 @@ public class Pantalla extends JFrame{
     }
 
     public void actualizarBtt_select(){
-        System.out.println("["+ puntosAtributos +"]");
         if(puntosAtributos==0){
             btt_select.setText("Comenzar");
             btt_select.setEnabled(true);
@@ -305,6 +310,10 @@ public class Pantalla extends JFrame{
             btt_select.setText("Tienes " + puntosAtributos);
             btt_select.setEnabled(false);
         }
+    }
+
+    public int[] getStats(){
+        return stats;
     }
 } 
     
