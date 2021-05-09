@@ -3,7 +3,6 @@ import graficos.Pantalla;
 public class Controlador {
     
     public static void main(String[] args) throws Exception {
-        int nivel=0;
         Pantalla pantalla = new Pantalla();
         pantalla.setVisible(true);
 
@@ -21,8 +20,6 @@ public class Controlador {
         while(!pantalla.continuar()){
             Thread.sleep(100);
         }
-
-        System.out.println("ATRIBUTOS");
 
         pantalla.pantallaSeleccionAtributos();
     }
