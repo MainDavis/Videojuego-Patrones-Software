@@ -3,7 +3,7 @@ package graficos;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,8 +16,8 @@ public class Pantalla extends JFrame{
     private ImageIcon bg_inicio = new ImageIcon("resources//backgrounds//DarkSouls_epic.gif");
     //Sprites
     private ImageIcon PJ_idle[] = { //Knight, Gunwoman, Wizard
-        new ImageIcon("resources//sprites//gunwoman//idle.gif"),
         new ImageIcon("resources//sprites//knight//idle.gif"),
+        new ImageIcon("resources//sprites//gunwoman//idle.gif"),
         new ImageIcon("resources//sprites//wizard//idle.gif")
     }; 
     //GUI
@@ -26,19 +26,17 @@ public class Pantalla extends JFrame{
     private JLabel pj;
     private JLabel background;
     private JLabel char_stats;
-        //Atributos
-        private JLabel stat_HP;
-        private JLabel stat_ATK;
-        private JLabel stat_MAG;
-        private JLabel stat_DEF;
-        private JLabel stat_SPD;
+    //Atributos
+    private JLabel lb_stats[] = new JLabel[5];
     //Botones
     private JButton btt_start;
     private JButton btt_siguiente, btt_anterior, btt_select;
-    private JButton btt_addHP, btt_rmvHP, btt_addATK, btt_rmvATK, btt_addMAG, btt_rmvMAG, btt_addDEF, btt_rmvDEF, btt_addSPD, btt_rmvSPD;
+    private JButton btt_atributos[][] = new JButton[5][2]; //[Estadistica][add/rmv]
     //Variables
     private int Npersonaje = 0;
     private boolean continuar = false;
+    private int puntosAtributos = 5;
+    private int stats[] = new int[5];
     //Vida, Ataque fisico, Ataque magico, Defensa, Evasion
     private final int[][] statsPJ = { {5,4,1,4,1}, {3,3,3,1,5}, {3,1,5,3,3}}; //Knight, Gunwoman, Wizard
 
@@ -96,26 +94,13 @@ public class Pantalla extends JFrame{
         char_stats.setBounds(417, 251, 450, 218);
 
         //Creo las Labels para las stats
-        stat_HP = new JLabel(Integer.toString(statsPJ[0][0]));
-        stat_HP.setBounds(690,240,50,100);
-        stat_HP.setFont(new Font("Serif", Font.BOLD, 35));
-
-        stat_ATK = new JLabel(Integer.toString(statsPJ[0][1]));
-        stat_ATK.setBounds(735,275,50,100);
-        stat_ATK.setFont(new Font("Serif", Font.BOLD, 35));
-
-        stat_MAG = new JLabel(Integer.toString(statsPJ[0][2]));
-        stat_MAG.setBounds(735,310,50,100);
-        stat_MAG.setFont(new Font("Serif", Font.BOLD, 35));
-
-        stat_DEF = new JLabel(Integer.toString(statsPJ[0][3]));
-        stat_DEF.setBounds(710,345,50,100);
-        stat_DEF.setFont(new Font("Serif", Font.BOLD, 35));
-
-        stat_SPD = new JLabel(Integer.toString(statsPJ[0][4]));
-        stat_SPD.setBounds(710,380,50,100);
-        stat_SPD.setFont(new Font("Serif", Font.BOLD, 35));
-
+        int y=240;
+        for(int i=0; i<5; i++){
+            lb_stats[i] = new JLabel(Integer.toString(statsPJ[0][i]));
+            lb_stats[i].setBounds(735,y,50,100);
+            lb_stats[i].setFont(new Font("Serif", Font.BOLD, 35));
+            y+=35;
+        }
         //Creo los nuevos botones
         btt_siguiente = new JButton("Siguiente");
         btt_siguiente.setBounds(900, 350, 150,50);
@@ -149,11 +134,9 @@ public class Pantalla extends JFrame{
         this.add(pj);
         this.add(btt_select);
 
-        this.add(stat_HP);
-        this.add(stat_ATK);
-        this.add(stat_MAG);
-        this.add(stat_DEF);
-        this.add(stat_SPD);
+        for(int i=0; i<5;i++){
+            this.add(lb_stats[i]);
+        }
 
         this.add(char_stats);
         this.add(btt_siguiente);
@@ -162,43 +145,121 @@ public class Pantalla extends JFrame{
     }
 
     public void pantallaSeleccionAtributos(){
-        //Damos 5 puntos para mejorar las stats
-        int puntos = 5;
-        //Pongo las stats del jugador igual a las del personaje que ha seleccionado
-        int stats[] = new int[5];
-        stats = statsPJ[Npersonaje];
+        //Elimino los botones anterior y siguiente
+        this.remove(btt_siguiente);
+        this.remove(btt_anterior);
+
+        stats = Arrays.copyOf(statsPJ[Npersonaje], 5);
         //Creo y coloco los botones de add y rmv
-        btt_addHP = new JButton("+");
-        btt_addHP.setBounds(815,255,45,45);
-        btt_rmvHP = new JButton("-");
-        btt_rmvHP.setBounds(770,255,45,45);
-
-        btt_addATK = new JButton("+");
-        btt_addATK.setBounds(815,295,45,45);
-        btt_rmvATK = new JButton("-");
-        btt_rmvATK.setBounds(770,295,45,45);
-
-        btt_addMAG = new JButton("+");
-        btt_addMAG.setBounds(815,335,45,45);
-        btt_rmvMAG = new JButton("-");
-        btt_rmvMAG.setBounds(770,335,45,45);
-
-        btt_addDEF = new JButton("+");
-        btt_addDEF.setBounds(815,375,45,45);
-        btt_rmvDEF = new JButton("-");
-        btt_rmvDEF.setBounds(770,375,45,45);
-
-        btt_addSPD = new JButton("+");
-        btt_addSPD.setBounds(815,415,45,45);
-        btt_rmvSPD = new JButton("-");
-        btt_rmvSPD.setBounds(770,415,45,45);
-        //Añado los eventos de click
-        btt_addHP.addActionListener(new ActionListener() {
+        int y=255;
+        for(int i=0; i<5; i++){
+            //Añadir
+            btt_atributos[i][0] = new JButton("+");
+            btt_atributos[i][0].setBounds(815, y, 45, 45);
+            //Quitar
+            btt_atributos[i][1] = new JButton("-");
+            btt_atributos[i][1].setBounds(770, y, 45, 45);
+            y+=40;
+        }
+        //Añado los eventos de los botones
+        //No puedo con un for -_-
+        //HP
+        btt_atributos[0][0].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                if(puntosAtributos==0) return;
+                puntosAtributos--;
+                stats[0]++;
+                lb_stats[0].setText(Integer.toString(stats[0]));
+                //Actualizo el boton
+                actualizarBtt_select();
             }
         });
-
+        btt_atributos[0][1].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(puntosAtributos==5 ||stats[0] == statsPJ[Npersonaje][0]) return;
+                puntosAtributos++;
+                stats[0]--;
+                lb_stats[0].setText(Integer.toString(stats[0]));
+                actualizarBtt_select();
+            }
+        });
+        //ATK
+        btt_atributos[1][0].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(puntosAtributos==0) return;
+                puntosAtributos--;
+                stats[1]++;
+                lb_stats[1].setText(Integer.toString(stats[1]));
+                actualizarBtt_select();
+            }
+        });
+        btt_atributos[1][1].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(puntosAtributos==5 ||stats[1] == statsPJ[Npersonaje][1]) return;
+                puntosAtributos++;
+                stats[1]--;
+                lb_stats[1].setText(Integer.toString(stats[1]));
+                actualizarBtt_select();
+            }
+        });
+        //MAG
+        btt_atributos[2][0].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(puntosAtributos==0) return;
+                puntosAtributos--;
+                stats[2]++;
+                lb_stats[2].setText(Integer.toString(stats[2]));
+                actualizarBtt_select();
+            }
+        });
+        btt_atributos[2][1].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(puntosAtributos==5 ||stats[2] == statsPJ[Npersonaje][2]) return;
+                puntosAtributos++;
+                stats[2]--;
+                lb_stats[2].setText(Integer.toString(stats[2]));
+                actualizarBtt_select();
+            }
+        });
+        //DEF
+        btt_atributos[3][0].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(puntosAtributos==0) return;
+                puntosAtributos--;
+                stats[3]++;
+                lb_stats[3].setText(Integer.toString(stats[3]));
+                actualizarBtt_select();
+            }
+        });
+        btt_atributos[3][1].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(puntosAtributos==5 ||stats[3] == statsPJ[Npersonaje][3]) return;
+                puntosAtributos++;
+                stats[3]--;
+                lb_stats[3].setText(Integer.toString(stats[3]));
+                actualizarBtt_select();
+            }
+        });
+        //SPD
+        btt_atributos[4][0].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(puntosAtributos==0) return;
+                puntosAtributos--;
+                stats[4]++;
+                lb_stats[4].setText(Integer.toString(stats[4]));
+                actualizarBtt_select();
+            }
+        });
+        btt_atributos[4][1].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(puntosAtributos==5 ||stats[4] == statsPJ[Npersonaje][4]) return;
+                puntosAtributos++;
+                stats[4]--;
+                lb_stats[4].setText(Integer.toString(stats[4]));
+                actualizarBtt_select();
+            }
+        });
+        
 
         btt_select.setEnabled(false);
         btt_select.setText("Tienes 5");
@@ -208,22 +269,14 @@ public class Pantalla extends JFrame{
         this.add(pj);
         this.add(btt_select);
 
-        this.add(stat_HP);
-        this.add(stat_ATK);
-        this.add(stat_MAG);
-        this.add(stat_DEF);
-        this.add(stat_SPD);
+        for(int i=0; i<5;i++){
+            this.add(lb_stats[i]);
+        }
 
-        this.add(btt_addHP);
-        this.add(btt_rmvHP);
-        this.add(btt_addATK);
-        this.add(btt_rmvATK);
-        this.add(btt_addMAG);
-        this.add(btt_rmvMAG);
-        this.add(btt_addDEF);
-        this.add(btt_rmvDEF);
-        this.add(btt_addSPD);
-        this.add(btt_rmvSPD);
+        for(int i=0; i<5; i++){
+            this.add(btt_atributos[i][0]);
+            this.add(btt_atributos[i][1]);
+        }
 
         this.add(char_stats);
         this.add(background);
@@ -239,11 +292,21 @@ public class Pantalla extends JFrame{
 
     public void cambiarIconPj(int index){
         pj.setIcon(PJ_idle[index]);
-        stat_HP.setText(Integer.toString(statsPJ[index][0]));
-        stat_ATK.setText(Integer.toString(statsPJ[index][1]));
-        stat_MAG.setText(Integer.toString(statsPJ[index][2]));
-        stat_DEF.setText(Integer.toString(statsPJ[index][3]));
-        stat_SPD.setText(Integer.toString(statsPJ[index][4]));
+        for(int i=0; i<5; i++){
+            lb_stats[i].setText(Integer.toString(statsPJ[index][i]));
+        }
+    }
+
+    public void actualizarBtt_select(){
+        System.out.println("["+ puntosAtributos +"]");
+        //Actualizo el boton
+        if(puntosAtributos==0){
+            btt_select.setText("Comenzar");
+            btt_select.setEnabled(true);
+        }else{
+            btt_select.setText("Tienes " + puntosAtributos);
+            btt_select.setEnabled(false);
+        }
     }
 } 
     
