@@ -34,8 +34,8 @@ public class Controlador {
         }
 
         //Crear el personaje
-
         Jugador jugador = new Jugador(pantalla.getStats(), pantalla.getNpersonaje());
+        //Patrón decorator
 
         //Asigno un recorrido aleatorio del mapa
         Random rand = new Random();
@@ -52,10 +52,17 @@ public class Controlador {
         for(int i=0; i<4 && !jugador.muerto(); i++){
 
             //Cargo el mapa
-
+            pantalla.cambiarMapa(i);
             for(int j=0; j<4 && !jugador.muerto(); j++){  // Skeleton, Chief, Wolf, Robot
-                
+                pantalla.cambiarEnemigo(j);
                 //Combates individuales
+
+                while(!jugador.muerto() || !enemigos.muerto()){
+
+                }
+
+
+
 
             }
 

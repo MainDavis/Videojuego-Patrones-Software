@@ -1,5 +1,9 @@
 package enemigos;
 
 public interface Chief {
-    void algo();
+    boolean muerto();
+    int getHP();
+    int getATK();
+    int getDEF();
+    int getSPD();
 }
