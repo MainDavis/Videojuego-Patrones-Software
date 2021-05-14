@@ -46,7 +46,21 @@ public class Controlador {
             mapa[index] = tmp;
         }
 
+        //Combate
+        pantalla.iniciaCombate();
 
+        for(int i=0; i<4 && !jugador.muerto(); i++){
+
+            //Cargo el mapa
+
+            for(int j=0; j<4 && !jugador.muerto(); j++){  // Skeleton, Chief, Wolf, Robot
+                
+                //Combates individuales
+
+            }
+
+
+        }
 
 
         

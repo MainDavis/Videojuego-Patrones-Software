@@ -24,8 +24,9 @@ public class Pantalla extends JFrame{
     private ImageIcon btt_inicio = new ImageIcon("resources//sprites//gui//btt_inicioR.png");
     private ImageIcon char_stats_icon = new ImageIcon("resources//sprites//gui//char_stats.png");
     private JLabel pj; // <- Jugador
+    private JLabel enemigo; // <- Enemigo
     private JLabel background;
-    private JLabel char_stats; // <- UI
+    private JLabel char_stats; // <- UI Atributos
     //Atributos
     private JLabel lb_stats[] = new JLabel[5];
     //Botones
@@ -137,6 +138,7 @@ public class Pantalla extends JFrame{
         for(int i=0; i<5;i++)
             this.add(lb_stats[i]);
 
+        this.add(pj);
         this.add(char_stats);
         this.add(btt_siguiente);
         this.add(btt_anterior);
@@ -257,13 +259,7 @@ public class Pantalla extends JFrame{
                 actualizarBtt_select();
             }
         });
-        //Boton seleccionar
-        btt_atributos[4][1].addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                continuar=true;
-            }
-        });
-        
+       
         //Modifico el botón de seleccionar
         btt_select.setEnabled(false);
         btt_select.setText("Tienes 5");
@@ -281,9 +277,32 @@ public class Pantalla extends JFrame{
             this.add(btt_atributos[i][1]);
         }
 
+        this.add(pj);
         this.add(char_stats);
         this.add(background);
     }
+
+    public void iniciaCombate(){
+        //Elimino todo menos el PJ y el fondo
+        for(int i=0; i<5; i++){
+            remove(btt_atributos[i][0]);
+            remove(btt_atributos[i][1]);
+            remove(lb_stats[i]);
+        }
+        remove(btt_select);
+        remove(char_stats);
+
+        //Recoloco el PJ
+        pj.setBounds(200,225,192,192);
+
+        //Creo al enemigo
+        enemigo = new JLabel();
+        enemigo.setBounds(700,255,192,192);
+
+        //this.add(pj);
+        this.add(enemigo);
+    }
+
 
     public boolean continuar(){
         if(continuar){
