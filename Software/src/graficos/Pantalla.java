@@ -23,9 +23,9 @@ public class Pantalla extends JFrame{
     //GUI
     private ImageIcon btt_inicio = new ImageIcon("resources//sprites//gui//btt_inicioR.png");
     private ImageIcon char_stats_icon = new ImageIcon("resources//sprites//gui//char_stats.png");
-    private JLabel pj;
+    private JLabel pj; // <- Jugador
     private JLabel background;
-    private JLabel char_stats;
+    private JLabel char_stats; // <- UI
     //Atributos
     private JLabel lb_stats[] = new JLabel[5];
     //Botones
@@ -34,7 +34,6 @@ public class Pantalla extends JFrame{
     private JButton btt_atributos[][] = new JButton[5][2]; //[Estadistica][add/rmv]
     //Variables
     private int Npersonaje = 0;
-    private int Nmapa;
     private boolean continuar = false;
     private int puntosAtributos = 5;
     private int stats[] = new int[5];
@@ -47,7 +46,7 @@ public class Pantalla extends JFrame{
     }
 
     private void configurarVentana(){
-        this.setTitle("Prueba");
+        this.setTitle("Juegardo");
         this.setSize(1280,720);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
@@ -76,7 +75,7 @@ public class Pantalla extends JFrame{
 
         //Ordenado de arriba a abajo
         this.add(btt_start);
-        this.add(background);     
+        this.add(background);   
 
     }
 
@@ -135,9 +134,8 @@ public class Pantalla extends JFrame{
         this.add(pj);
         this.add(btt_select);
 
-        for(int i=0; i<5;i++){
+        for(int i=0; i<5;i++)
             this.add(lb_stats[i]);
-        }
 
         this.add(char_stats);
         this.add(btt_siguiente);

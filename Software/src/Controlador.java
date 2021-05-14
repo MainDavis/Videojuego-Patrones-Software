@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Random;
 
 import graficos.Pantalla;
@@ -7,7 +6,6 @@ public class Controlador {
     
     public static void main(String[] args) throws Exception {
         //Atributos del jugador
-        int stats[] = new int[5]; 
         int mapa[] = {0,1,2,3};
 
         Pantalla pantalla = new Pantalla();
@@ -35,8 +33,8 @@ public class Controlador {
             Thread.sleep(100);
         }
 
-        //Pongo las stats seleccionadas
-        stats = pantalla.getStats();
+        //Crear el personaje
+
 
         //Asigno un recorrido aleatorio del mapa
         Random rand = new Random();
@@ -46,6 +44,10 @@ public class Controlador {
             mapa[mapa.length - 1 - i] = mapa[index];
             mapa[index] = tmp;
         }
+
+
+
+
         
     }
 }
