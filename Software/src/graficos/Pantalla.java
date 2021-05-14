@@ -13,13 +13,25 @@ import javax.swing.JLabel;
 public class Pantalla extends JFrame{
 
     //Backgrounds
-    private ImageIcon bg_inicio = new ImageIcon("resources//backgrounds//DarkSouls_epic.gif");
+    private ImageIcon backgrounds[] = {
+        new ImageIcon("resources//backgrounds//DarkSouls_epic.gif"),
+        new ImageIcon("resources//backgrounds//rio.gif"),
+        new ImageIcon("resources//backgrounds//ninja.gif"),
+        new ImageIcon("resources//backgrounds//apocalipsis.gif"),
+        new ImageIcon("resources//backgrounds//DarkSouls_epic.gif")
+    };
     //Sprites
     private ImageIcon PJ_idle[] = { //Knight, Gunwoman, Wizard
         new ImageIcon("resources//sprites//knight//idle.gif"),
         new ImageIcon("resources//sprites//gunwoman//idle.gif"),
         new ImageIcon("resources//sprites//wizard//idle.gif")
     }; 
+    private ImageIcon Enemigo_idle[] = { //Skeleton, Chief, Wolf, Robot
+        new ImageIcon("resources//sprites//skeleton//idle.gif"),
+        new ImageIcon("resources//sprites//chief//idle.gif"),
+        new ImageIcon("resources//sprites//wolf//idle.gif"),
+        new ImageIcon("resources//sprites//robot//idle.gif")
+    };
     //GUI
     private ImageIcon btt_inicio = new ImageIcon("resources//sprites//gui//btt_inicioR.png");
     private ImageIcon char_stats_icon = new ImageIcon("resources//sprites//gui//char_stats.png");
@@ -35,6 +47,7 @@ public class Pantalla extends JFrame{
     private JButton btt_atributos[][] = new JButton[5][2]; //[Estadistica][add/rmv]
     //Variables
     private int Npersonaje = 0;
+    private int Nenemigo = 0;
     private boolean continuar = false;
     private int puntosAtributos = 5;
     private int stats[] = new int[5];
@@ -72,7 +85,7 @@ public class Pantalla extends JFrame{
             }
         });
         
-        background.setIcon(bg_inicio); 
+        background.setIcon(backgrounds[0]);
 
         //Ordenado de arriba a abajo
         this.add(btt_start);
@@ -327,6 +340,15 @@ public class Pantalla extends JFrame{
             btt_select.setText("Tienes " + puntosAtributos);
             btt_select.setEnabled(false);
         }
+    }
+
+    public void cambiarEnemigo(int n){
+        Nenemigo = n;
+        enemigo.setIcon(Enemigo_idle[n]);
+    }
+
+    public void cambiarMapa(int n){
+        background.setIcon(backgrounds[n+1]);
     }
 
     public int[] getStats(){
