@@ -6,7 +6,7 @@ import enemigos.Chief;
 import enemigos.Wolf;
 import enemigos.Robot;
 
-public class EnemigosMapa1 implements EnemyFactory{
+public class EnemigosMapa3 implements EnemyFactory{
     public Skeleton crearSkeleton(int HP, int ATK) {
         return new SkeletonMapa3(HP, ATK);
     }

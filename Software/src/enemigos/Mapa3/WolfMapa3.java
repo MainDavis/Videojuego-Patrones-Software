@@ -2,7 +2,7 @@ package enemigos.Mapa3;
 
 import enemigos.Wolf;
 
-public class WolfMapa1 implements Wolf{
+public class WolfMapa3 implements Wolf{
     int HP;
     int ATK;
 
