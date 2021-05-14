@@ -1,12 +1,26 @@
 import java.util.Random;
 
+import enemigos.Skeleton;
+import enemigos.Chief;
+import enemigos.Wolf;
+import enemigos.Robot;
+import enemigos.EnemyFactory;
+import enemigos.Mapa1.EnemigosMapa1;
+import enemigos.Mapa2.EnemigosMapa2;
+import enemigos.Mapa3.EnemigosMapa3;
+import enemigos.Mapa4.EnemigosMapa4;
 import graficos.Pantalla;
 
 public class Controlador {
     
     public static void main(String[] args) throws Exception {
-        //Atributos del jugador
         int mapa[] = {0,1,2,3};
+        //Creo los enemigos
+        EnemyFactory enemyFactory = new EnemigosMapa1(); //Por defecto lo pongo a Mapa1
+        Skeleton skeleton;
+        Chief chief;
+        Wolf wolf;
+        Robot robot;
 
         Pantalla pantalla = new Pantalla();
         pantalla.setVisible(true);
@@ -53,27 +67,46 @@ public class Controlador {
 
             //Cargo el mapa
             pantalla.cambiarMapa(i);
-            //Creo los enemigos 
+            //Pongo la fabrica
+            switch(i){
+                case 0:
+                    enemyFactory = new EnemigosMapa1();
+                    break;
+                case 1: 
+                    enemyFactory = new EnemigosMapa2();
+                    break;
+                case 2:
+                    enemyFactory = new EnemigosMapa3();
+                    break;
+                case 3:
+                    enemyFactory = new EnemigosMapa4();
+                    break;    
+            }
+            skeleton = enemyFactory.crearSkeleton(50+(25*1), 2+(2*i), 1+(1*i), 1+(1*i));
+            chief = enemyFactory.crearChief(75+(25*1), 5+(2*i), 1+(1*i), 1+(1*i));
+            wolf = enemyFactory.crearWolf(100+(25*1), 5+(2*i), 1+(1*i), 3+(1*i));
+            robot = enemyFactory.crearRobot(200+(25*1), 10+(2*i), 4+(1*i), 1+(1*i));
 
+            //Duelos
 
-            for(int j=0; j<4 && !jugador.muerto(); j++){  // Skeleton, Chief, Wolf, Robot
-                pantalla.cambiarEnemigo(j);
-                //Combates individuales
-
-                while(!jugador.muerto() || !enemigos.muerto()){
-
-                }
-
-
-
+            while(!jugador.muerto() || !skeleton.muerto()){
 
             }
 
+            while(!jugador.muerto() || !chief.muerto()){
+
+            }
+
+            while(!jugador.muerto() || !wolf.muerto()){
+
+            }
+
+            while(!jugador.muerto() || !robot.muerto()){
+
+            }
 
         }
-
-
-        
+ 
     }
 }
 
