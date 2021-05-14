@@ -313,5 +313,9 @@ public class Pantalla extends JFrame{
     public int[] getStats(){
         return stats;
     }
+
+    public int getNpersonaje(){
+        return Npersonaje;
+    }
 } 
     

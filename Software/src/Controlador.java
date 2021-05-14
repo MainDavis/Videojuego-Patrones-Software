@@ -35,6 +35,7 @@ public class Controlador {
 
         //Crear el personaje
 
+        Jugador jugador = new Jugador(pantalla.getStats(), pantalla.getNpersonaje());
 
         //Asigno un recorrido aleatorio del mapa
         Random rand = new Random();
