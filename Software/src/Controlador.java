@@ -53,6 +53,9 @@ public class Controlador {
 
             //Cargo el mapa
             pantalla.cambiarMapa(i);
+            //Creo los enemigos 
+
+
             for(int j=0; j<4 && !jugador.muerto(); j++){  // Skeleton, Chief, Wolf, Robot
                 pantalla.cambiarEnemigo(j);
                 //Combates individuales

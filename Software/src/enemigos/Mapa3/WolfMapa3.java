@@ -20,3 +20,5 @@ public class WolfMapa3 implements Wolf{
     public int getATK() { return this.ATK; }
     public int getDEF() { return this.DEF; }
     public int getSPD() { return this.SPD; }
+    
+}
