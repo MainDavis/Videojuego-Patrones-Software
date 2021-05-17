@@ -39,6 +39,7 @@ public class Pantalla extends JFrame{
     private JLabel enemigo; // <- Enemigo
     private JLabel background;
     private JLabel char_stats; // <- UI Atributos
+    private JLabel HP_Jugador, HP_Enemigo;
     //Atributos
     private JLabel lb_stats[] = new JLabel[5];
     //Botones
@@ -319,6 +320,12 @@ public class Pantalla extends JFrame{
         btt_curarse = new JButton("Awita");
         btt_curarse.setBounds(620, 500, 200, 100);
 
+        //Creo las labels de la vida
+        HP_Jugador = new JLabel("HP: ");
+        HP_Jugador.setBounds(200, 100, 200, 50);
+        HP_Enemigo = new JLabel("HP: ");
+        HP_Jugador.setBounds(600, 100, 200, 50);
+
         //Eventos de los botones
         btt_atacar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -334,6 +341,8 @@ public class Pantalla extends JFrame{
         //this.add(pj);
         this.add(btt_atacar);
         this.add(btt_curarse);
+        this.add(HP_Jugador);
+        this.add(HP_Enemigo);
         this.add(enemigo);
         this.add(background);
     }
@@ -395,6 +404,11 @@ public class Pantalla extends JFrame{
 
     public int getNpersonaje(){
         return Npersonaje;
+    }
+
+    public void actualizarHP(int jugador, int enemigo){
+        HP_Jugador.setText("HP: " + jugador);
+        HP_Enemigo.setText("HP: " + enemigo);
     }
 } 
     

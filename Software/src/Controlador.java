@@ -93,6 +93,7 @@ public class Controlador {
 
             pantalla.cambiarEnemigo(0);
             while(!jugador.muerto() || !skeleton.muerto()){
+                pantalla.actualizarHP(jugador.getHP(), skeleton.getHP());
                 //Turno jugador
                 accion = false;
                 while(accion){
@@ -108,6 +109,7 @@ public class Controlador {
                 //Turno enemigo
                 if(!skeleton.muerto()){
                     //Acciones del skeleto
+
                 }
             }
 
