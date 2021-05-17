@@ -45,10 +45,11 @@ public class Pantalla extends JFrame{
     private JButton btt_start;
     private JButton btt_siguiente, btt_anterior, btt_select;
     private JButton btt_atributos[][] = new JButton[5][2]; //[Estadistica][add/rmv]
+    private JButton btt_atacar, btt_curarse;
     //Variables
     private int Npersonaje = 0;
     private int Nenemigo = 0;
-    private boolean continuar = false;
+    private boolean continuar = false, atacar=false, curarse=false;
     private int puntosAtributos = 5;
     private int stats[] = new int[5];
     //Vida, Ataque fisico, Ataque magico, Defensa, Evasion
@@ -310,10 +311,31 @@ public class Pantalla extends JFrame{
 
         //Creo al enemigo
         enemigo = new JLabel();
-        enemigo.setBounds(700,255,192,192);
+        enemigo.setBounds(900,225,192,192);
+
+        //Creo y pongo los botones
+        btt_atacar = new JButton("PUTAZO");
+        btt_atacar.setBounds(420, 500, 200, 100);
+        btt_curarse = new JButton("Awita");
+        btt_curarse.setBounds(620, 500, 200, 100);
+
+        //Eventos de los botones
+        btt_atacar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                atacar = true;
+            }
+        });
+        btt_curarse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                curarse = true;
+            }
+        });
 
         //this.add(pj);
+        this.add(btt_atacar);
+        this.add(btt_curarse);
         this.add(enemigo);
+        this.add(background);
     }
 
 
@@ -349,6 +371,22 @@ public class Pantalla extends JFrame{
 
     public void cambiarMapa(int n){
         background.setIcon(backgrounds[n+1]);
+    }
+
+    public boolean getAtacar(){
+        if(atacar){
+            atacar = false;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean getCurarse(){
+        if(curarse){
+            curarse = false;
+            return true;
+        }
+        return false;
     }
 
     public int[] getStats(){

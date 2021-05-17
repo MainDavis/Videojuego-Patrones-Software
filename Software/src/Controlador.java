@@ -22,6 +22,8 @@ public class Controlador {
         Wolf wolf;
         Robot robot;
 
+        boolean accion=false;
+
         Pantalla pantalla = new Pantalla();
         pantalla.setVisible(true);
 
@@ -66,7 +68,7 @@ public class Controlador {
         for(int i=0; i<4 && !jugador.muerto(); i++){
 
             //Cargo el mapa
-            pantalla.cambiarMapa(i);
+            pantalla.cambiarMapa(mapa[i]);
             //Pongo la fabrica
             switch(i){
                 case 0:
@@ -89,20 +91,39 @@ public class Controlador {
 
             //Duelos
 
+            pantalla.cambiarEnemigo(0);
             while(!jugador.muerto() || !skeleton.muerto()){
+                //Turno jugador
+                accion = false;
+                while(accion){
+                    if(!pantalla.getAtacar()){
+                        System.out.println("ATACAR");
+                        accion = true;
+                    }else if(!pantalla.getCurarse()){
+                        System.out.println("DEFENDER");
+                        accion = true;
+                    }
+                }
 
+                //Turno enemigo
+                if(!skeleton.muerto()){
+                    //Acciones del skeleto
+                }
             }
 
+            pantalla.cambiarEnemigo(1);
             while(!jugador.muerto() || !chief.muerto()){
-
+                
             }
 
+            pantalla.cambiarEnemigo(2);
             while(!jugador.muerto() || !wolf.muerto()){
-
+                
             }
 
+            pantalla.cambiarEnemigo(3);
             while(!jugador.muerto() || !robot.muerto()){
-
+                
             }
 
         }

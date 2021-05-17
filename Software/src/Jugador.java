@@ -12,8 +12,8 @@ public class Jugador {
     public Jugador(int atributos[], int nPJ){
         this.atributos = Arrays.copyOf(atributos, 5);
 
-        for(int i=0; i<0; i++)
-        this.estadisticas[i] = atributos[i] * escaladoPJ[nPJ][i];
+        for(int i=0; i<5; i++)
+            this.estadisticas[i] = atributos[i] * escaladoPJ[nPJ][i];           
 
     }
 
