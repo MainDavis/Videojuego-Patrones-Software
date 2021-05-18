@@ -19,9 +19,4 @@ public abstract class Decorator implements Estadisticas{
         this.estadistica = estadistica;
     }
 
-
-
-
-
-    
 }
