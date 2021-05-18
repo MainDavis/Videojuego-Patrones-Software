@@ -1,5 +1,5 @@
 package enemigos.Estrategia;
 
-public class EstrategiaAtaque {
+public class EstrategiaAtaque implements EstrategiaCombate{
     
 }
