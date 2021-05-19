@@ -1,33 +1,40 @@
-import java.util.Arrays;
-
 public class Jugador {
-    //HP ATK MAG DEF SPD
-    private int atributos[] = new int[5]; 
-    private int estadisticas[] = new int[5];
-    private final int escaladoPJ[][] = {
-        {20,3,1,4,1},
-        {10,2,2,2,4},
-        {15,1,3,2,2}
-    };
-    public Jugador(int atributos[], int nPJ){
-        this.atributos = Arrays.copyOf(atributos, 5);
-
-        for(int i=0; i<5; i++)
-            this.estadisticas[i] = atributos[i] * escaladoPJ[nPJ][i];           
-
+    private final int nPJ;
+    private int HP, HPMax;
+    
+    public Jugador(int nPJ){
+        this.nPJ = nPJ;
+        this.HP = 100;
+        this.HPMax = 100;
     }
 
-    void recibirDamage(int damage){
-        this.estadisticas[0] -= damage;
+    public void recibirDamage(int damage){ this.HP -= damage; }
+
+    public void curarse(int HP){
+        this.HP += HP;
+        if(HP > HPMax) HP = HPMax;
     }
 
-    boolean muerto(){
-        return (this.estadisticas[0] > 0) ? false : true;
+    public boolean muerto(){ return (HP > 0) ? false : true; }
+
+    public void actualizarVida(int HPstat){
+        
+        switch(nPJ){
+            case 0:
+                HPMax = HPstat*25;
+                break;
+            case 1:
+                HPMax = HPstat*15;
+                break;
+            case 2:
+                HPMax = HPstat*10;
+        }
+
+        this.HP = HPMax;
     }
 
-    int getHP() { return this.estadisticas[0]; }
-    int getATK(){ return this.estadisticas[1]; }
-    int getMAG(){ return this.estadisticas[2]; }
-    int getDEF(){ return this.estadisticas[3]; }
-    int getSPD(){ return this.estadisticas[4]; }
+    public int getNPJ(){ return this.nPJ; }
+
+    public int getHP() { return this.HP; }
+
 }

@@ -50,7 +50,7 @@ public class Controlador {
         }
 
         //Crear el personaje
-        Jugador jugador = new Jugador(pantalla.getStats(), pantalla.getNpersonaje());
+        Jugador jugador = new Jugador(pantalla.getNpersonaje());
         //Patrón decorator
 
         //Asigno un recorrido aleatorio del mapa
