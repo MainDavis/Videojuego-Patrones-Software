@@ -9,13 +9,13 @@ public abstract class Decorator implements Estadisticas{
         
     }
 
-    protected Estadisticas getEstadisticas(){
+    protected Estadisticas getComponent(){
         return estadistica;
     }
      
 
 
-    private void setEstadisticas(Estadisticas estadistica2) {
+    private void setEstadisticas(Estadisticas estadistica) {
         this.estadistica = estadistica;
     }
 

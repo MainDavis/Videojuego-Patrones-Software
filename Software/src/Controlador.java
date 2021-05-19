@@ -132,17 +132,5 @@ public class Controlador {
  
     }
 
-    
-/*
-
-//Se inicializa el knight
-Knight knight = new Knight();
-
-DecoratedMundo decoratedMundo = new DecoratedMundo(knight);
-
-System.out.println("Ataque: " + decoratedMundo.getAtaque() );
-
-*/
-
 }
 
