@@ -1,5 +1,7 @@
 import java.util.Random;
 
+import Decorator.EstadisticasBase;
+import Decorator.NewEstadisticas;
 import enemigos.Skeleton;
 import enemigos.Chief;
 import enemigos.Wolf;
@@ -52,6 +54,10 @@ public class Controlador {
         //Crear el personaje
         Jugador jugador = new Jugador(pantalla.getNpersonaje());
         //Patrón decorator
+        EstadisticasBase estadisticasBase = new EstadisticasBase(pantalla.getStats());
+        NewEstadisticas newEstadisticas =  new NewEstadisticas(estadisticasBase);
+        jugador.actualizarVida(newEstadisticas.getEstadisticas()[0]);
+
 
         //Asigno un recorrido aleatorio del mapa
         Random rand = new Random();
@@ -127,6 +133,8 @@ public class Controlador {
             while(!jugador.muerto() || !robot.muerto()){
                 
             }
+            //Subimos las estadisticas cuando se pase de mundo
+            newEstadisticas = new NewEstadisticas(newEstadisticas);
 
         }
  
