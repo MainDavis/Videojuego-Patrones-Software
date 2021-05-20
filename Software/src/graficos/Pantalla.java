@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import java.awt.Color;
+
 public class Pantalla extends JFrame{
 
     //Backgrounds
@@ -37,6 +39,7 @@ public class Pantalla extends JFrame{
     private ImageIcon char_stats_icon = new ImageIcon("resources//sprites//gui//char_stats.png");
     private JLabel pj; // <- Jugador
     private JLabel enemigo; // <- Enemigo
+    private JLabel damage_pj, damage_enemigo;
     private JLabel background;
     private JLabel char_stats; // <- UI Atributos
     private JLabel HP_Jugador, HP_Enemigo;
@@ -314,6 +317,13 @@ public class Pantalla extends JFrame{
         enemigo = new JLabel();
         enemigo.setBounds(900,225,192,192);
 
+        //Creo y coloco las labes de los daños
+        damage_pj = new JLabel();
+        damage_pj.setBounds(200, 225, 192, 192);
+        damage_pj.setIcon(PJ_idle[0]);
+        damage_pj.setVisible(false);
+
+        damage_enemigo = new JLabel();
         //Creo y pongo los botones
         btt_atacar = new JButton("PUTAZO");
         btt_atacar.setBounds(420, 500, 200, 100);
@@ -322,14 +332,20 @@ public class Pantalla extends JFrame{
 
         //Creo las labels de la vida
         HP_Jugador = new JLabel("HP: ");
-        HP_Jugador.setBounds(200, 100, 200, 50);
+        HP_Jugador.setBounds(200, 200, 200, 50);
+        HP_Jugador.setFont(new Font("Serif", Font.BOLD, 35));
+        HP_Jugador.setForeground(Color.red);
+
         HP_Enemigo = new JLabel("HP: ");
-        HP_Jugador.setBounds(600, 100, 200, 50);
+        HP_Enemigo.setFont(new Font("Serif", Font.BOLD, 35));
+        HP_Enemigo.setForeground(Color.red);
+        HP_Enemigo.setBounds(920, 200, 200, 50);
 
         //Eventos de los botones
         btt_atacar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 atacar = true;
+                damage_pj.setVisible(true);
             }
         });
         btt_curarse.addActionListener(new ActionListener() {
@@ -339,10 +355,12 @@ public class Pantalla extends JFrame{
         });
 
         //this.add(pj);
+        this.add(damage_pj);
         this.add(btt_atacar);
         this.add(btt_curarse);
         this.add(HP_Jugador);
         this.add(HP_Enemigo);
+        this.add(pj);
         this.add(enemigo);
         this.add(background);
     }
