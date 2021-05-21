@@ -114,7 +114,12 @@ public class Controlador {
                         pantalla.animAttackPJ(true);
                         Thread.sleep(1000);
                         pantalla.impactoEnemigo();
-                        Thread.sleep(1600);
+
+                        if(jugador.getNPJ() == 0) Thread.sleep(1000);
+                        else if(jugador.getNPJ() == 1) Thread.sleep(1600);
+                        else Thread.sleep(900);
+                        
+                        //Thread.sleep(1000); //Wizard 900, Gunwoman 1600, Knight 1000
                         pantalla.animAttackPJ(false);
                         
                         pantalla.actualizarHP(jugador.getHP(), skeleton.getStats()[0]);
