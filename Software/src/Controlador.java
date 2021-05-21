@@ -104,7 +104,25 @@ public class Controlador {
 
             for(int j=0; j<4; j++){
                 System.out.println("NUEVO COMBATE");
-                enemigo = enemyFactory.crearSkeleton(5, 5, 5, 5, 5);
+                
+                switch(j){
+                    case 0:
+                        enemigo = enemyFactory.crearSkeleton(2, 2, 1, 2, 2);
+                        break;
+                    case 1:
+                        enemigo = enemyFactory.crearChief(5, 5, 5, 5, 5);
+                        break;
+                    case 2:
+                        enemigo = enemyFactory.crearWolf(5, 5, 5, 5, 5);
+                        break;
+                    case 3:
+                        enemigo = enemyFactory.crearRobot(5, 5, 5, 5, 5);
+                        break;
+                    default:
+                        enemigo = null; //para que no salgan errores
+                }
+
+
                 pantalla.cambiarEnemigo(j);
 
                 while(!jugador.muerto() && !enemigo.muerto()){

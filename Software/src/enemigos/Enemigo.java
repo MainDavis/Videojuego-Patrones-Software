@@ -31,6 +31,8 @@ public abstract class Enemigo {
 
     public void recibirDamage(int damage){
         this.HP -= damage;
+
+        if(this.HP < 0) this.HP = 0;
     }
 
 }
