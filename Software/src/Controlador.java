@@ -92,24 +92,33 @@ public class Controlador {
                     enemyFactory = new EnemigosMapa4();
                     break;    
             }
-            skeleton = enemyFactory.crearSkeleton(50+(25*i), 2+(2*i), 1+(1*i), 1+(1*i));
-            //chief = enemyFactory.crearChief(75+(25*i), 10,5+(2*i), 1+(1*i), 1+(1*i));
-            wolf = enemyFactory.crearWolf(100+(25*i), 5+(2*i), 1+(1*i), 3+(1*i));
-            robot = enemyFactory.crearRobot(200+(25*i), 7+(2*i), 4+(1*i), 1+(1*i));
+            skeleton = enemyFactory.crearSkeleton(100+(25*i), 2+(2*i), 1+(2*i), 1+(1*i), 1+(1*i));
+            chief = enemyFactory.crearChief(75+(25*i),5+(2*i), 3+(2*i), 1+(1*i), 1+(1*i));
+            wolf = enemyFactory.crearWolf(100+(25*i), 5+(2*i), 1+(2*i), 1+(1*i), 3+(1*i));
+            robot = enemyFactory.crearRobot(200+(25*i), 7+(2*i), 4+(2*i), 4+(1*i), 1+(1*i));
 
             //Duelos
 
             pantalla.cambiarEnemigo(0);
             while(!jugador.muerto() || !skeleton.muerto()){
-                pantalla.actualizarHP(jugador.getHP(), skeleton.getHP());
+                pantalla.actualizarHP(jugador.getHP(), skeleton.getStats()[0]);
                 //Turno jugador
                 accion = true;
                 while(accion){
                     if(pantalla.getAtacar()){
-                        //int damage = calculadora.calcDamage(newEstadisticas.getEstadisticas(), skeleton.getStats());
+
+                        int damage = calculadora.calcDamage(newEstadisticas.getEstadisticas(), skeleton.getStats());
+                        System.out.println("DAMAGE: " + damage);
+                        skeleton.recibirDamage(damage);
+
                         pantalla.animAttackPJ(true);
-                        Thread.sleep(2600);
+                        Thread.sleep(1000);
+                        pantalla.impactoEnemigo();
+                        Thread.sleep(1600);
                         pantalla.animAttackPJ(false);
+                        
+                        pantalla.actualizarHP(jugador.getHP(), skeleton.getStats()[0]);
+
                         accion = false;
                     }else if(pantalla.getCurarse()){
                         
@@ -130,9 +139,9 @@ public class Controlador {
             }
 
             pantalla.cambiarEnemigo(1);
-            /* while(!jugador.muerto() || !chief.muerto()){
+            while(!jugador.muerto() || !chief.muerto()){
                 
-            } */
+            }
 
             pantalla.cambiarEnemigo(2);
             while(!jugador.muerto() || !wolf.muerto()){
