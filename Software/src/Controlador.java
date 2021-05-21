@@ -93,7 +93,7 @@ public class Controlador {
                     break;    
             }
             skeleton = enemyFactory.crearSkeleton(50+(25*i), 2+(2*i), 1+(1*i), 1+(1*i));
-            chief = enemyFactory.crearChief(75+(25*i), 5+(2*i), 1+(1*i), 1+(1*i));
+            //chief = enemyFactory.crearChief(75+(25*i), 10,5+(2*i), 1+(1*i), 1+(1*i));
             wolf = enemyFactory.crearWolf(100+(25*i), 5+(2*i), 1+(1*i), 3+(1*i));
             robot = enemyFactory.crearRobot(200+(25*i), 7+(2*i), 4+(1*i), 1+(1*i));
 
@@ -107,12 +107,16 @@ public class Controlador {
                 while(accion){
                     if(pantalla.getAtacar()){
                         //int damage = calculadora.calcDamage(newEstadisticas.getEstadisticas(), skeleton.getStats());
-
-
+                        pantalla.animAttackPJ(true);
+                        Thread.sleep(2600);
+                        pantalla.animAttackPJ(false);
                         accion = false;
                     }else if(pantalla.getCurarse()){
                         
-                        curarPJ(jugador, newEstadisticas.getEstadisticas()[2], pantalla);
+                        pantalla.animAttackEnemigo(true);
+                        Thread.sleep(1800);
+                        pantalla.animAttackEnemigo(false);
+                        //curarPJ(jugador, newEstadisticas.getEstadisticas()[2], pantalla);
                         accion = false;
                     }
 
@@ -126,9 +130,9 @@ public class Controlador {
             }
 
             pantalla.cambiarEnemigo(1);
-            while(!jugador.muerto() || !chief.muerto()){
+            /* while(!jugador.muerto() || !chief.muerto()){
                 
-            }
+            } */
 
             pantalla.cambiarEnemigo(2);
             while(!jugador.muerto() || !wolf.muerto()){

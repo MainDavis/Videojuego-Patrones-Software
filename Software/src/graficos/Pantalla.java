@@ -454,13 +454,23 @@ public class Pantalla extends JFrame{
     }
 
     public void animAttackPJ(boolean animacion){
-        if(animacion) pj.setIcon(PJ_attack[Npersonaje]);
-        else pj.setIcon(PJ_idle[Npersonaje]);
+        if(animacion){
+            pj.setBounds(104, 225, 384, 192);
+            pj.setIcon(PJ_attack[Npersonaje]);
+        }else{
+            pj.setBounds(200,225,192,192);
+            pj.setIcon(PJ_idle[Npersonaje]);
+        }
     }
 
     public void animAttackEnemigo(boolean animacion){
-        if(animacion) enemigo.setIcon(Enemigo_attack[Nenemigo]);
-        else enemigo.setIcon(Enemigo_idle[Nenemigo]);
+        if(animacion){
+            enemigo.setBounds(708,130,384,288);
+            enemigo.setIcon(Enemigo_attack[Nenemigo]);
+        }else{
+            enemigo.setBounds(900,225,192,192);
+            enemigo.setIcon(Enemigo_idle[Nenemigo]);
+        }
     }
 
     public void impactoPJ(){
@@ -486,5 +496,6 @@ public class Pantalla extends JFrame{
         estadosAlterados[0].getImage().flush();
         damage_enemigo.setIcon(estadosAlterados[0]);
     }
+
 } 
     
