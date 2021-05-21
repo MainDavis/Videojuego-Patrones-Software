@@ -24,6 +24,8 @@ public class Controlador {
         Wolf wolf;
         Robot robot;
 
+        CalcularDamage calculadora = CalcularDamage.instance();
+
         boolean accion=false;
 
         Pantalla pantalla = new Pantalla();
@@ -93,7 +95,7 @@ public class Controlador {
             skeleton = enemyFactory.crearSkeleton(50+(25*1), 2+(2*i), 1+(1*i), 1+(1*i));
             chief = enemyFactory.crearChief(75+(25*1), 5+(2*i), 1+(1*i), 1+(1*i));
             wolf = enemyFactory.crearWolf(100+(25*1), 5+(2*i), 1+(1*i), 3+(1*i));
-            robot = enemyFactory.crearRobot(200+(25*1), 10+(2*i), 4+(1*i), 1+(1*i));
+            robot = enemyFactory.crearRobot(200+(25*1), 7+(2*i), 4+(1*i), 1+(1*i));
 
             //Duelos
 
@@ -101,21 +103,25 @@ public class Controlador {
             while(!jugador.muerto() || !skeleton.muerto()){
                 pantalla.actualizarHP(jugador.getHP(), skeleton.getHP());
                 //Turno jugador
-                accion = false;
+                accion = true;
                 while(accion){
-                    if(!pantalla.getAtacar()){
-                        System.out.println("ATACAR");
-                        accion = true;
-                    }else if(!pantalla.getCurarse()){
-                        System.out.println("DEFENDER");
-                        accion = true;
+                    if(pantalla.getAtacar()){
+                        //int damage = calculadora.calcDamage(newEstadisticas.getEstadisticas(), skeleton.getStats());
+
+
+                        accion = false;
+                    }else if(pantalla.getCurarse()){
+                        
+                        curarPJ(jugador, newEstadisticas.getEstadisticas()[2], pantalla);
+                        accion = false;
                     }
+
+                    Thread.sleep(250);
                 }
 
                 //Turno enemigo
                 if(!skeleton.muerto()){
                     //Acciones del skeleto
-
                 }
             }
 
@@ -126,7 +132,7 @@ public class Controlador {
 
             pantalla.cambiarEnemigo(2);
             while(!jugador.muerto() || !wolf.muerto()){
-                
+
             }
 
             pantalla.cambiarEnemigo(3);
@@ -138,6 +144,12 @@ public class Controlador {
 
         }
  
+    }
+
+    public static void curarPJ(Jugador jugador, int MAG, Pantalla pantalla){
+        int curacion = MAG*7;
+        jugador.curarse(curacion);
+        pantalla.curarPJ();
     }
 
 }

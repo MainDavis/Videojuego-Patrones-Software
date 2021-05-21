@@ -27,12 +27,37 @@ public class Pantalla extends JFrame{
         new ImageIcon("resources//sprites//knight//idle.gif"),
         new ImageIcon("resources//sprites//gunwoman//idle.gif"),
         new ImageIcon("resources//sprites//wizard//idle.gif")
-    }; 
+    };
+    private ImageIcon PJ_attack[] = {
+        new ImageIcon("resources//sprites//knight//attack.gif"),
+        new ImageIcon("resources//sprites//gunwoman//attack.gif"),
+        new ImageIcon("resources//sprites//wizard//attack.gif")
+    };
+    private ImageIcon ImpactPJ[] = {
+        new ImageIcon("resources//sprites//knight//impact.gif"),
+        new ImageIcon("resources//sprites//gunwoman//impact.gif"),
+        new ImageIcon("resources//sprites//wizard//impact.gif")
+    };
     private ImageIcon Enemigo_idle[] = { //Skeleton, Chief, Wolf, Robot
         new ImageIcon("resources//sprites//skeleton//idle.gif"),
         new ImageIcon("resources//sprites//chief//idle.gif"),
         new ImageIcon("resources//sprites//wolf//idle.gif"),
         new ImageIcon("resources//sprites//robot//idle.gif")
+    };
+    private ImageIcon Enemigo_attack[] = { //Skeleton, Chief, Wolf, Robot
+        new ImageIcon("resources//sprites//skeleton//attack.gif"),
+        new ImageIcon("resources//sprites//chief//attack.gif"),
+        new ImageIcon("resources//sprites//wolf//attack.gif"),
+        new ImageIcon("resources//sprites//robot//attack.gif")
+    };
+    private ImageIcon ImpactEnemigo[] = {
+        new ImageIcon("resources//sprites//skeleton//impact.gif"),
+        new ImageIcon("resources//sprites//chief//impact.gif"),
+        new ImageIcon("resources//sprites//wolf//impact.gif"),
+        new ImageIcon("resources//sprites//robot//impact.gif") 
+    };
+    private ImageIcon estadosAlterados[] = { //Cura, 
+        new ImageIcon("resources//sprites//estadosAlterados//cura.gif")
     };
     //GUI
     private ImageIcon btt_inicio = new ImageIcon("resources//sprites//gui//btt_inicioR.png");
@@ -320,14 +345,13 @@ public class Pantalla extends JFrame{
         //Creo y coloco las labes de los daños
         damage_pj = new JLabel();
         damage_pj.setBounds(200, 225, 192, 192);
-        damage_pj.setIcon(PJ_idle[0]);
-        damage_pj.setVisible(false);
 
         damage_enemigo = new JLabel();
+        damage_enemigo.setBounds(900,225,192,192);
         //Creo y pongo los botones
-        btt_atacar = new JButton("PUTAZO");
+        btt_atacar = new JButton("ARRANCAR CABEZA");
         btt_atacar.setBounds(420, 500, 200, 100);
-        btt_curarse = new JButton("Awita");
+        btt_curarse = new JButton("BEBER LA SANGRE DE TUS ENEMIGOS");
         btt_curarse.setBounds(620, 500, 200, 100);
 
         //Creo las labels de la vida
@@ -345,7 +369,6 @@ public class Pantalla extends JFrame{
         btt_atacar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 atacar = true;
-                damage_pj.setVisible(true);
             }
         });
         btt_curarse.addActionListener(new ActionListener() {
@@ -356,6 +379,7 @@ public class Pantalla extends JFrame{
 
         //this.add(pj);
         this.add(damage_pj);
+        this.add(damage_enemigo);
         this.add(btt_atacar);
         this.add(btt_curarse);
         this.add(HP_Jugador);
@@ -427,6 +451,40 @@ public class Pantalla extends JFrame{
     public void actualizarHP(int jugador, int enemigo){
         HP_Jugador.setText("HP: " + jugador);
         HP_Enemigo.setText("HP: " + enemigo);
+    }
+
+    public void animAttackPJ(boolean animacion){
+        if(animacion) pj.setIcon(PJ_attack[Npersonaje]);
+        else pj.setIcon(PJ_idle[Npersonaje]);
+    }
+
+    public void animAttackEnemigo(boolean animacion){
+        if(animacion) enemigo.setIcon(Enemigo_attack[Nenemigo]);
+        else enemigo.setIcon(Enemigo_idle[Nenemigo]);
+    }
+
+    public void impactoPJ(){
+        damage_pj.setIcon(null);
+        ImpactEnemigo[Nenemigo].getImage().flush();
+        damage_pj.setIcon(ImpactEnemigo[Nenemigo]);
+    }
+
+    public void impactoEnemigo(){
+        damage_enemigo.setIcon(null);
+        ImpactPJ[Npersonaje].getImage().flush();
+        damage_enemigo.setIcon(ImpactPJ[Npersonaje]);
+    }
+
+    public void curarPJ(){
+        damage_pj.setIcon(null);
+        estadosAlterados[0].getImage().flush();
+        damage_pj.setIcon(estadosAlterados[0]);
+    }
+
+    public void curarEnemigo(){
+        damage_enemigo.setIcon(null);
+        estadosAlterados[0].getImage().flush();
+        damage_enemigo.setIcon(estadosAlterados[0]);
     }
 } 
     

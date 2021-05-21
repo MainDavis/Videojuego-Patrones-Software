@@ -1,3 +1,4 @@
+
 public class Jugador {
     private final int nPJ;
     private int HP, HPMax;
@@ -10,9 +11,9 @@ public class Jugador {
 
     public void recibirDamage(int damage){ this.HP -= damage; }
 
-    public void curarse(int HP){
-        this.HP += HP;
-        if(HP > HPMax) HP = HPMax;
+    public void curarse(int cura){
+        this.HP += cura;
+        if(this.HP > HPMax) this.HP = HPMax;
     }
 
     public boolean muerto(){ return (HP > 0) ? false : true; }

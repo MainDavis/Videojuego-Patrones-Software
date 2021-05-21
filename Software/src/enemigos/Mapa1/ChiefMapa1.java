@@ -5,6 +5,7 @@ import enemigos.Chief;
 public class ChiefMapa1 implements Chief{
     int HP;
     int ATK;
+    int MAG;
     int DEF;
     int SPD;
 

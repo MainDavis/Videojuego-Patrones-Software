@@ -5,6 +5,7 @@ import enemigos.Wolf;
 public class WolfMapa1 implements Wolf{
     int HP;
     int ATK;
+    int MAG;
     int DEF;
     int SPD;
 

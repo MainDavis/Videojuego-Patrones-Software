@@ -5,6 +5,7 @@ import enemigos.Robot;
 public class RobotMapa2 implements Robot{
     int HP;
     int ATK;
+    int MAG;
     int DEF;
     int SPD;
 
