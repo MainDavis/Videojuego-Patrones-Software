@@ -7,19 +7,19 @@ import enemigos.Wolf;
 import enemigos.Robot;
 
 public class EnemigosMapa4 implements EnemyFactory{
-    public Skeleton crearSkeleton(int HP, int ATK, int DEF, int SPD) {
-        return new SkeletonMapa4(HP, ATK, DEF, SPD);
+    public Skeleton crearSkeleton(int HP, int ATK, int MAG, int DEF, int SPD) {
+        return new SkeletonMapa4(HP, ATK, MAG, DEF, SPD);
     }
 
-    public Chief crearChief(int HP, int ATK, int DEF, int SPD) {
-        return new ChiefMapa4(HP, ATK, DEF, SPD);
+    public Chief crearChief(int HP, int ATK, int MAG, int DEF, int SPD) {
+        return new ChiefMapa4(HP, ATK, MAG, DEF, SPD);
     }
 
-    public Wolf crearWolf(int HP, int ATK, int DEF, int SPD) {
-        return new WolfMapa4(HP, ATK, DEF, SPD);
+    public Wolf crearWolf(int HP, int ATK, int MAG, int DEF, int SPD) {
+        return new WolfMapa4(HP, ATK, MAG, DEF, SPD);
     }
 
-    public Robot crearRobot(int HP, int ATK, int DEF, int SPD) {
-        return new RobotMapa4(HP, ATK, DEF, SPD);
+    public Robot crearRobot(int HP, int ATK, int MAG, int DEF, int SPD) {
+        return new RobotMapa4(HP, ATK, MAG, DEF, SPD);
     }
 }
