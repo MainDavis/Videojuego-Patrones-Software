@@ -3,21 +3,38 @@ package enemigos.Mapa4;
 import enemigos.Skeleton;
 
 public class SkeletonMapa4 implements Skeleton{
+    int HPmax;
     int HP;
     int ATK;
+    int MAG;
     int DEF;
     int SPD;
 
-    public SkeletonMapa4(int HP, int ATK, int DEF, int SPD){
+    public SkeletonMapa4(int HP, int ATK, int MAG,int DEF, int SPD){
         this.HP = HP;
+        this.HPmax = HP;
         this.ATK = ATK;
+        this.MAG = MAG;
         this.DEF = DEF;
         this.SPD = SPD;
     }
-    
-    public boolean muerto() { return (HP > 0) ? false : true; }
-    public int getHP() { return this.HP; }
-    public int getATK() { return this.ATK; }
-    public int getDEF() { return this.DEF; }
-    public int getSPD() { return this.SPD; }
+
+    public boolean muerto() {
+        return (HP > 0) ? false : true;
+    }
+
+    public int[] getStats() {
+        int[] stats = { HP, ATK, MAG, DEF, SPD };
+        return stats;
+    }
+
+    public void curarse(int cura) {
+        this.HP += cura;
+        if (this.HP > this.HPmax)
+            this.HP = this.HPmax;
+    }
+
+    public void recibirDamage(int damage) {
+        this.HP -= damage;
+    }
 }
