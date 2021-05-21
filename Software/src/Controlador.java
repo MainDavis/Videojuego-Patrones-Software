@@ -92,10 +92,10 @@ public class Controlador {
                     enemyFactory = new EnemigosMapa4();
                     break;    
             }
-            skeleton = enemyFactory.crearSkeleton(50+(25*1), 2+(2*i), 1+(1*i), 1+(1*i));
-            chief = enemyFactory.crearChief(75+(25*1), 5+(2*i), 1+(1*i), 1+(1*i));
-            wolf = enemyFactory.crearWolf(100+(25*1), 5+(2*i), 1+(1*i), 3+(1*i));
-            robot = enemyFactory.crearRobot(200+(25*1), 7+(2*i), 4+(1*i), 1+(1*i));
+            skeleton = enemyFactory.crearSkeleton(50+(25*i), 2+(2*i), 1+(1*i), 1+(1*i));
+            chief = enemyFactory.crearChief(75+(25*i), 5+(2*i), 1+(1*i), 1+(1*i));
+            wolf = enemyFactory.crearWolf(100+(25*i), 5+(2*i), 1+(1*i), 3+(1*i));
+            robot = enemyFactory.crearRobot(200+(25*i), 7+(2*i), 4+(1*i), 1+(1*i));
 
             //Duelos
 
