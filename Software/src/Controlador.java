@@ -2,10 +2,7 @@ import java.util.Random;
 
 import Decorator.EstadisticasBase;
 import Decorator.NewEstadisticas;
-import enemigos.Skeleton;
-import enemigos.Chief;
-import enemigos.Wolf;
-import enemigos.Robot;
+import enemigos.Enemigo;
 import enemigos.EnemyFactory;
 import enemigos.Mapa1.EnemigosMapa1;
 import enemigos.Mapa2.EnemigosMapa2;
@@ -19,10 +16,7 @@ public class Controlador {
         int mapa[] = {0,1,2,3};
         //Creo los enemigos
         EnemyFactory enemyFactory = new EnemigosMapa1(); //Por defecto lo pongo a Mapa1
-        Skeleton skeleton;
-        Chief chief;
-        Wolf wolf;
-        Robot robot;
+        Enemigo enemigo;
 
         CalcularDamage calculadora = CalcularDamage.instance();
 
@@ -104,82 +98,70 @@ public class Controlador {
                     enemyFactory = new EnemigosMapa4();
                     break;    
             }
-            skeleton = enemyFactory.crearSkeleton(100+(25*i), 2+(2*i), 1+(2*i), 1+(1*i), 1+(1*i));
-            chief = enemyFactory.crearChief(75+(25*i),5+(2*i), 3+(2*i), 1+(1*i), 1+(1*i));
-            wolf = enemyFactory.crearWolf(100+(25*i), 5+(2*i), 1+(2*i), 1+(1*i), 3+(1*i));
-            robot = enemyFactory.crearRobot(200+(25*i), 7+(2*i), 4+(2*i), 4+(1*i), 1+(1*i));
+
 
             //Duelos
 
-            pantalla.cambiarEnemigo(0);
-            while(!jugador.muerto() && !skeleton.muerto()){
-                pantalla.actualizarHP(jugador.getHP(), skeleton.getStats()[0]);
-                //Turno jugador
-                accion = true;
-                while(accion){
-                    if(pantalla.getAtacar()){
+            for(int j=0; j<4; j++){
+                System.out.println("NUEVO COMBATE");
+                enemigo = enemyFactory.crearSkeleton(5, 5, 5, 5, 5);
+                pantalla.cambiarEnemigo(j);
 
-                        int damage = calculadora.calcDamage(newEstadisticas.getEstadisticas(), skeleton.getStats());
-                        skeleton.recibirDamage(damage);
-
-                        animAttackPJ(pantalla, jugador.getNPJ());
-
-                        pantalla.actualizarHP(jugador.getHP(), skeleton.getStats()[0]);
-
-                        accion = false;
-
-                    }else if(pantalla.getCurarse()){
+                while(!jugador.muerto() && !enemigo.muerto()){
+                    pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
+                    //Turno jugador
+                    accion = true;
+                    while(accion){
+                        if(pantalla.getAtacar()){
+    
+                            int damage = calculadora.calcDamage(newEstadisticas.getEstadisticas(), enemigo.getStats());
+                            enemigo.recibirDamage(damage);
+    
+                            animAttackPJ(pantalla, jugador.getNPJ());
+    
+                            pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
+    
+                            accion = false;
+    
+                        }else if(pantalla.getCurarse()){
+                            
+                            curarPJ(jugador, newEstadisticas.getEstadisticas()[2], pantalla);
+    
+                            pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
+    
+                            accion = false;
+                        }
+    
+                        try {
+                            Thread.sleep(250);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         
-                        curarPJ(jugador, newEstadisticas.getEstadisticas()[2], pantalla);
-
-                        pantalla.actualizarHP(jugador.getHP(), skeleton.getStats()[0]);
-
-                        accion = false;
                     }
-
-                    try {
-                        Thread.sleep(250);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+    
+                    //Turno enemigo
+                    if(!enemigo.muerto()){
+                        //Acciones del skeleto
+                        
+                        /*Esto es lo que toca hoy gente*/
+                        
+                        System.out.println("TURNO ENEMIGO");   
+    
                     }
-                    
                 }
 
-                //Turno enemigo
-                if(!skeleton.muerto()){
-                    //Acciones del skeleto
-                    
-                    /*Esto es lo que toca hoy gente*/
-                    
-                    System.out.println("TURNO ENEMIGO");
-
-
-
-
-                }
-            }
-
-            pantalla.cambiarEnemigo(1);
-            while(!jugador.muerto() || !chief.muerto()){
-                pantalla.actualizarHP(jugador.getHP(), chief.getStats()[0]);
-            }
-
-            pantalla.cambiarEnemigo(2);
-            while(!jugador.muerto() || !wolf.muerto()){
+                //Termina el duelo
 
             }
 
-            pantalla.cambiarEnemigo(3);
-            while(!jugador.muerto() || !robot.muerto()){
-                
-            }
-            //Subimos las estadisticas cuando se pase de mundo
             newEstadisticas = new NewEstadisticas(newEstadisticas);
             jugador.actualizarVida(newEstadisticas.getEstadisticas()[0]);
 
-        }
  
     }
+
+}
 
     public static void curarPJ(Jugador jugador, int MAG, Pantalla pantalla){
         int curacion = MAG*7;

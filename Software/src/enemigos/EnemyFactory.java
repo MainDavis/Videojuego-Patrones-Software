@@ -1,8 +1,8 @@
 package enemigos;
 
 public interface EnemyFactory {
-    Skeleton crearSkeleton(int HP, int ATK, int MAG, int DEF, int SPD);
-    Chief crearChief(int HP, int ATK, int MAG, int DEF, int SPD);
-    Wolf crearWolf(int HP, int ATK, int MAG, int DEF, int SPD);
-    Robot crearRobot(int HP, int ATK, int MAG, int DEF, int SPD);
+    Enemigo crearSkeleton(int HP, int ATK, int MAG, int DEF, int SPD);
+    Enemigo crearChief(int HP, int ATK, int MAG, int DEF, int SPD);
+    Enemigo crearWolf(int HP, int ATK, int MAG, int DEF, int SPD);
+    Enemigo crearRobot(int HP, int ATK, int MAG, int DEF, int SPD);
 }
