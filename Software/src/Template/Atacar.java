@@ -1,22 +1,59 @@
-package Template;
-import enemigos.Estrategia.Contexto;
-import enemigos.Estrategia.EstrategiaFullAtk;
+package template;
 
+import Calculadora.CalcularDamage;
+import Decorator.Estadisticas;
+import Jugador.Jugador;
+import enemigos.Enemigo;
+import graficos.Pantalla;
 
 public class Atacar extends TemplateMethod {
 
-    Contexto c = null;
+    public void ejecutaAccion(Jugador jugador, Estadisticas stats, Enemigo enemigo, CalcularDamage calculadora) {
+        System.out.println("Ejecuto accion de ataque");
+        int damage = calculadora.calcDamage(enemigo.getStats(), stats.getEstadisticas());
+        jugador.recibirDamage(damage);
 
-    public void ejecutaAccion() {
-
-        
-    c = new Contexto(new EstrategiaFullAtk());
     }
-
-   
-    public void ejecutaAnimacion() {
-
+    
+    public void ejecutaAnimacion(Pantalla pantalla, int nEnemigo) {
         
+        System.out.println("Ejecuto animacion de ataque");
+
+        pantalla.animAttackEnemigo(true);
+
+        try {
+            Thread.sleep(900);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        pantalla.impactoPJ();
+
+        int millis=0;
+
+        switch(nEnemigo){
+            case 0:
+                millis = 900;
+                break;
+            case 1:
+                millis = 900;
+                break;
+            case 2:
+                millis = 900;
+                break;
+            case 3:
+                millis = 900;
+                break;
+        }
+
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        pantalla.animAttackEnemigo(false);
+
     }
     
 }

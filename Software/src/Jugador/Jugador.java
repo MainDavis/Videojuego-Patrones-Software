@@ -1,3 +1,4 @@
+package Jugador;
 
 public class Jugador {
     private final int nPJ;

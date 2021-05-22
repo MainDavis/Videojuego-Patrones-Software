@@ -20,7 +20,7 @@ public abstract class Enemigo {
     public boolean muerto() { return (HP > 0) ? false : true; }
     
     public int[] getStats(){
-        int[] stats = {HP, ATK, MAG, DEF, SPD};
+        int[] stats = {HP, ATK, MAG, DEF, SPD, HPmax};
         return stats;
     }
 

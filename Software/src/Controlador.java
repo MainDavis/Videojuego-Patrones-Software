@@ -1,14 +1,18 @@
 import java.util.Random;
 
+import Calculadora.CalcularDamage;
 import Decorator.EstadisticasBase;
 import Decorator.NewEstadisticas;
+import Jugador.Jugador;
 import enemigos.Enemigo;
 import enemigos.EnemyFactory;
+import enemigos.Estrategia.*;
 import enemigos.Mapa1.EnemigosMapa1;
 import enemigos.Mapa2.EnemigosMapa2;
 import enemigos.Mapa3.EnemigosMapa3;
 import enemigos.Mapa4.EnemigosMapa4;
 import graficos.Pantalla;
+import template.*;
 
 public class Controlador {
     
@@ -19,8 +23,10 @@ public class Controlador {
         Enemigo enemigo;
 
         CalcularDamage calculadora = CalcularDamage.instance();
+        Contexto c = null;
+        TemplateMethod template;
 
-        boolean accion=false;
+        boolean seleccionJugador=false;
 
         Pantalla pantalla = new Pantalla();
         pantalla.setVisible(true);
@@ -107,16 +113,16 @@ public class Controlador {
                 
                 switch(j){
                     case 0:
-                        enemigo = enemyFactory.crearSkeleton(2, 2, 1, 2, 2);
+                        enemigo = enemyFactory.crearSkeleton(200, 2, 1, 2, 2);
                         break;
                     case 1:
-                        enemigo = enemyFactory.crearChief(5, 5, 5, 5, 5);
+                        enemigo = enemyFactory.crearChief(250, 5, 5, 5, 5);
                         break;
                     case 2:
-                        enemigo = enemyFactory.crearWolf(5, 5, 5, 5, 5);
+                        enemigo = enemyFactory.crearWolf(300, 5, 5, 5, 5);
                         break;
                     case 3:
-                        enemigo = enemyFactory.crearRobot(5, 5, 5, 5, 5);
+                        enemigo = enemyFactory.crearRobot(350, 5, 5, 5, 5);
                         break;
                     default:
                         enemigo = null; //para que no salgan errores
@@ -128,8 +134,8 @@ public class Controlador {
                 while(!jugador.muerto() && !enemigo.muerto()){
                     pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
                     //Turno jugador
-                    accion = true;
-                    while(accion){
+                    seleccionJugador = true;
+                    while(seleccionJugador){
                         if(pantalla.getAtacar()){
     
                             int damage = calculadora.calcDamage(newEstadisticas.getEstadisticas(), enemigo.getStats());
@@ -139,7 +145,7 @@ public class Controlador {
     
                             pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
     
-                            accion = false;
+                            seleccionJugador = false;
     
                         }else if(pantalla.getCurarse()){
                             
@@ -147,7 +153,7 @@ public class Controlador {
     
                             pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
     
-                            accion = false;
+                            seleccionJugador = false;
                         }
     
                         try {
@@ -162,8 +168,24 @@ public class Controlador {
                     if(!enemigo.muerto()){
                         //Acciones del skeleto
                         
-                        /*Esto es lo que toca hoy gente*/
+                        //Dependiendo de la vida tomo una estrategia
+                        int enemigoHPMax = enemigo.getStats()[5];
+                        int enemigoHP = enemigo.getStats()[0];
                         
+                        if(enemigoHP == enemigoHPMax) c = new Contexto(new EstrategiaFullAtk());
+                        else if( enemigoHP < enemigoHPMax  &&  enemigoHP >= enemigoHPMax/2) c = new Contexto(new EstrategiaAtaque());
+                        else if( enemigoHP < enemigoHP/2 && enemigoHP >= enemigoHPMax/4) c = new Contexto(new EstrategiaCura());
+                        else c = new Contexto(new EstrategiaFullCura());
+                    
+                        boolean accion = c.ejecutaEstrategia(); //True: Ataque, False: Cura
+
+                        //Ejecuto un algoritmo dependiendo de la accion que se debe ejecutar
+
+                        if(accion) template = new Atacar();//Ataca
+                        else template = new Curar(); //Cura
+
+                        template.turnoEnemigo(jugador, newEstadisticas, enemigo, calculadora, pantalla, j);
+
                         System.out.println("TURNO ENEMIGO");   
     
                     }

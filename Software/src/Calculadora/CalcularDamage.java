@@ -1,3 +1,4 @@
+package Calculadora;
 public class CalcularDamage {
     
     private final int escaladoDamage = 150;
