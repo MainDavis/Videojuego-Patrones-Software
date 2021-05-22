@@ -8,8 +8,8 @@ public class Contexto {
         this.combate = combate;
     }
 
-    public ejecutaEstrategia(){
-        return combate.sacarAccion();
+    public boolean ejecutaEstrategia(int HP){
+        return combate.sacarAccion(HP);
     }
 
 
