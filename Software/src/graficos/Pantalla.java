@@ -463,9 +463,22 @@ public class Pantalla extends JFrame{
         }
     }
 
-    public void animAttackEnemigo(boolean animacion){
+    public void animAttackEnemigo(boolean animacion, int nEnemigo){
         if(animacion){
-            enemigo.setBounds(708,130,384,288);
+            switch(nEnemigo){
+                case 0:
+                    enemigo.setBounds(708,130,384,288);
+                    break;
+                case 1:
+                    enemigo.setBounds(800,130,384,288);
+                    break;
+                case 2:
+                    enemigo.setBounds(808,180,384,288);
+                    break;
+                case 3:
+                    enemigo.setBounds(804,176,384,288);
+                    break;
+            }
             enemigo.setIcon(Enemigo_attack[Nenemigo]);
         }else{
             enemigo.setBounds(900,225,192,192);
@@ -474,27 +487,41 @@ public class Pantalla extends JFrame{
     }
 
     public void impactoPJ(){
+
         damage_pj.setIcon(null);
         ImpactEnemigo[Nenemigo].getImage().flush();
         damage_pj.setIcon(ImpactEnemigo[Nenemigo]);
+        
     }
 
     public void impactoEnemigo(){
-        damage_enemigo.setIcon(null);
+
+        damage_pj.setIcon(null);
         ImpactPJ[Npersonaje].getImage().flush();
         damage_enemigo.setIcon(ImpactPJ[Npersonaje]);
+
     }
 
-    public void curarPJ(){
-        damage_pj.setIcon(null);
-        estadosAlterados[0].getImage().flush();
-        damage_pj.setIcon(estadosAlterados[0]);
+    public void curarPJ(boolean animacion){
+
+        if(animacion){
+            estadosAlterados[0].getImage().flush();
+            damage_pj.setIcon(estadosAlterados[0]);
+        }else{
+            damage_pj.setIcon(null);
+        }
+        
     }
 
-    public void curarEnemigo(){
-        damage_enemigo.setIcon(null);
-        estadosAlterados[0].getImage().flush();
-        damage_enemigo.setIcon(estadosAlterados[0]);
+    public void curarEnemigo(boolean animacion){
+
+        if(animacion){
+            estadosAlterados[0].getImage().flush();
+            damage_enemigo.setIcon(estadosAlterados[0]);
+        }else{
+            damage_enemigo.setIcon(null);
+        }
+     
     }
 
 } 

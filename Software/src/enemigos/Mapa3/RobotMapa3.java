@@ -5,7 +5,7 @@ import enemigos.Enemigo;
 public class RobotMapa3 extends Enemigo{
 
     public RobotMapa3(int HP, int ATK, int MAG,int DEF, int SPD){
-        super(HP, ATK, MAG, DEF, SPD);
+        super(HP+2, ATK+2, MAG, DEF+2, SPD);
     }
     
 }

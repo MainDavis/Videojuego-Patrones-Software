@@ -15,13 +15,15 @@ public class Curar extends TemplateMethod {
     }
 
     public void ejecutaAnimacion(Pantalla pantalla, int nEnemigo) {
-        pantalla.curarEnemigo();
+        pantalla.curarEnemigo(true);
 
         try {
             Thread.sleep(1800);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        pantalla.curarEnemigo(false);
     }
     
 }

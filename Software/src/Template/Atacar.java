@@ -17,7 +17,7 @@ public class Atacar extends TemplateMethod {
     
     public void ejecutaAnimacion(Pantalla pantalla, int nEnemigo) {
 
-        pantalla.animAttackEnemigo(true);
+        pantalla.animAttackEnemigo(true, nEnemigo);
 
         try {
             Thread.sleep(900);
@@ -50,7 +50,7 @@ public class Atacar extends TemplateMethod {
             e.printStackTrace();
         }
 
-        pantalla.animAttackEnemigo(false);
+        pantalla.animAttackEnemigo(false, nEnemigo);
 
     }
     

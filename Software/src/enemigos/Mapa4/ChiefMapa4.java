@@ -5,7 +5,7 @@ import enemigos.Enemigo;
 public class ChiefMapa4 extends Enemigo{
 
     public ChiefMapa4(int HP, int ATK, int MAG,int DEF, int SPD){
-        super(HP, ATK, MAG, DEF, SPD);
+        super(HP+3, ATK, MAG+3, DEF+3, SPD+3);
     }
     
 }

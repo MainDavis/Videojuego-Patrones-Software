@@ -5,7 +5,7 @@ import enemigos.Enemigo;
 public class SkeletonMapa4 extends Enemigo{
 
     public SkeletonMapa4(int HP, int ATK, int MAG,int DEF, int SPD){
-        super(HP, ATK, MAG, DEF, SPD);
+        super(HP+3, ATK+3, MAG, DEF+3, SPD+3);
     }
     
 }

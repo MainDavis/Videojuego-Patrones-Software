@@ -108,20 +108,20 @@ public class Controlador {
 
             //Duelos
 
-            for(int j=0; j<4; j++){
+            for(int j=0; j<4 && !jugador.muerto(); j++){
                 
                 switch(j){
                     case 0:
-                        enemigo = enemyFactory.crearSkeleton(200, 2, 1, 2, 2);
+                        enemigo = enemyFactory.crearSkeleton(1, 2+j, 1+j, 2+j, 2+j);
                         break;
                     case 1:
-                        enemigo = enemyFactory.crearChief(250, 3, 5, 1, 1);
+                        enemigo = enemyFactory.crearChief(1, 3+j, 5+j, 1+j, 1+j);
                         break;
                     case 2:
-                        enemigo = enemyFactory.crearWolf(300, 3, 1, 2, 5);
+                        enemigo = enemyFactory.crearWolf(1, 3+j, 1+j, 2+j, 5+j);
                         break;
                     case 3:
-                        enemigo = enemyFactory.crearRobot(350, 5, 1, 5, 1);
+                        enemigo = enemyFactory.crearRobot(1, 5+j, 1+j, 5+j, 1+j);
                         break;
                     default:
                         enemigo = null; //para que no salgan errores
@@ -147,7 +147,7 @@ public class Controlador {
                             seleccionJugador = false;
     
                         }else if(pantalla.getCurarse()){
-                            
+
                             curarPJ(jugador, newEstadisticas.getEstadisticas()[2], pantalla);
     
                             pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
@@ -165,8 +165,7 @@ public class Controlador {
     
                     //Turno enemigo
                     if(!enemigo.muerto()){
-                        //Acciones del skeleto
-                        
+
                         //Dependiendo de la vida tomo una estrategia
                         int enemigoHPMax = enemigo.getStats()[5];
                         int enemigoHP = enemigo.getStats()[0];
@@ -183,36 +182,41 @@ public class Controlador {
                         if(accion) template = new Atacar();//Ataca
                         else template = new Curar(); //Cura
 
-                        template.turnoEnemigo(jugador, newEstadisticas, enemigo, calculadora, pantalla, j);
+                        template.turnoEnemigo(jugador, newEstadisticas, enemigo, calculadora, pantalla, j);  
 
-                        System.out.println("TURNO ENEMIGO");   
+                        pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
     
                     }
                 }
-
-                //Termina el duelo
-
+                //Terminan los duelo
             }
 
-            newEstadisticas = new NewEstadisticas(newEstadisticas);
-            jugador.actualizarVida(newEstadisticas.getEstadisticas()[0]);
 
- 
+            if(!jugador.muerto()){
+                newEstadisticas = new NewEstadisticas(newEstadisticas);
+                jugador.actualizarVida(newEstadisticas.getEstadisticas()[0]);
+            }      
+            
+
+        }
+
+        System.out.println("La partida ha terminado");
+
     }
-
-}
 
     public static void curarPJ(Jugador jugador, int MAG, Pantalla pantalla){
         int curacion = MAG*7;
         jugador.curarse(curacion);
 
-        pantalla.curarPJ();
+        pantalla.curarPJ(true);
 
         try {
             Thread.sleep(1800);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        pantalla.curarPJ(false);
     }
 
     public static void animAttackPJ(Pantalla pantalla, int nPJ){

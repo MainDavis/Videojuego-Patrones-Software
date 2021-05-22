@@ -10,7 +10,10 @@ public class Jugador {
         this.HPMax = 100;
     }
 
-    public void recibirDamage(int damage){ this.HP -= damage; }
+    public void recibirDamage(int damage){ 
+        this.HP -= damage; 
+        if(this.HP > HPMax) this.HP = HPMax;
+    }
 
     public void curarse(int cura){
         this.HP += cura;
