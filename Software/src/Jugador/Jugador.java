@@ -23,13 +23,13 @@ public class Jugador {
         
         switch(nPJ){
             case 0:
-                HPMax = HPstat*25;
+                HPMax = HPstat*75;
                 break;
             case 1:
-                HPMax = HPstat*15;
+                HPMax = HPstat*50;
                 break;
             case 2:
-                HPMax = HPstat*10;
+                HPMax = HPstat*30;
         }
 
         this.HP = HPMax;

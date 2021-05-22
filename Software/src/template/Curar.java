@@ -9,11 +9,19 @@ import graficos.Pantalla;
 public class Curar extends TemplateMethod {
 
     public void ejecutaAccion(Jugador jugador, Estadisticas stats, Enemigo enemigo, CalcularDamage calculadora) {
-        System.out.println("ME CURO");
+        int cura = enemigo.getStats()[2]*7;
+        enemigo.curarse(cura);
+
     }
 
     public void ejecutaAnimacion(Pantalla pantalla, int nEnemigo) {
-        System.out.println("EJECUTO ANIMACION");
+        pantalla.curarEnemigo();
+
+        try {
+            Thread.sleep(1800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     
 }

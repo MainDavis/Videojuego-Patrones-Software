@@ -109,20 +109,19 @@ public class Controlador {
             //Duelos
 
             for(int j=0; j<4; j++){
-                System.out.println("NUEVO COMBATE");
                 
                 switch(j){
                     case 0:
                         enemigo = enemyFactory.crearSkeleton(200, 2, 1, 2, 2);
                         break;
                     case 1:
-                        enemigo = enemyFactory.crearChief(250, 5, 5, 5, 5);
+                        enemigo = enemyFactory.crearChief(250, 3, 5, 1, 1);
                         break;
                     case 2:
-                        enemigo = enemyFactory.crearWolf(300, 5, 5, 5, 5);
+                        enemigo = enemyFactory.crearWolf(300, 3, 1, 2, 5);
                         break;
                     case 3:
-                        enemigo = enemyFactory.crearRobot(350, 5, 5, 5, 5);
+                        enemigo = enemyFactory.crearRobot(350, 5, 1, 5, 1);
                         break;
                     default:
                         enemigo = null; //para que no salgan errores
@@ -175,7 +174,7 @@ public class Controlador {
                         if(enemigoHP == enemigoHPMax) c = new Contexto(new EstrategiaFullAtk());
                         else if( enemigoHP < enemigoHPMax  &&  enemigoHP >= enemigoHPMax/2) c = new Contexto(new EstrategiaAtaque());
                         else if( enemigoHP < enemigoHP/2 && enemigoHP >= enemigoHPMax/4) c = new Contexto(new EstrategiaCura());
-                        else c = new Contexto(new EstrategiaFullCura());
+                        else if(enemigoHP < enemigoHPMax/4) c = new Contexto(new EstrategiaFullCura());
                     
                         boolean accion = c.ejecutaEstrategia(); //True: Ataque, False: Cura
 

@@ -9,15 +9,13 @@ import graficos.Pantalla;
 public class Atacar extends TemplateMethod {
 
     public void ejecutaAccion(Jugador jugador, Estadisticas stats, Enemigo enemigo, CalcularDamage calculadora) {
-        System.out.println("Ejecuto accion de ataque");
+       
         int damage = calculadora.calcDamage(enemigo.getStats(), stats.getEstadisticas());
         jugador.recibirDamage(damage);
 
     }
     
     public void ejecutaAnimacion(Pantalla pantalla, int nEnemigo) {
-        
-        System.out.println("Ejecuto animacion de ataque");
 
         pantalla.animAttackEnemigo(true);
 
