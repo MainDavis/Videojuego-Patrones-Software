@@ -1,4 +1,4 @@
-package template;
+package Template;
 
 public abstract class TemplateMethod {
     public final void turnoEnemigo(){
