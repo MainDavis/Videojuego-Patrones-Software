@@ -185,7 +185,7 @@ public class Controlador {
                         
                         if(enemigoHP == enemigoHPMax) c = new Contexto(new EstrategiaFullAtk());
                         else if( enemigoHP < enemigoHPMax  &&  enemigoHP >= enemigoHPMax/2) c = new Contexto(new EstrategiaAtaque());
-                        else if( enemigoHP < enemigoHP/2 && enemigoHP >= enemigoHPMax/4) c = new Contexto(new EstrategiaCura());
+                        else if( enemigoHP < enemigoHPMax && enemigoHP >= enemigoHPMax/4) c = new Contexto(new EstrategiaCura());
                         else if(enemigoHP < enemigoHPMax/4) c = new Contexto(new EstrategiaFullCura());
                     
                         boolean accion = c.ejecutaEstrategia(); //True: Ataque, False: Cura
