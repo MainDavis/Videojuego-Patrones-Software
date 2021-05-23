@@ -17,6 +17,7 @@ import template.*;
 public class Controlador {
     
     public static void main(String[] args){
+
         int mapa[] = {0,1,2,3};
         //Creo los enemigos
         EnemyFactory enemyFactory = new EnemigosMapa1(); //Por defecto lo pongo a Mapa1
@@ -112,16 +113,16 @@ public class Controlador {
                 
                 switch(j){
                     case 0:
-                        enemigo = enemyFactory.crearSkeleton(1, 2+j, 1+j, 2+j, 2+j);
+                        enemigo = enemyFactory.crearSkeleton(100, 2, 1, 2, 2);
                         break;
                     case 1:
-                        enemigo = enemyFactory.crearChief(1, 3+j, 5+j, 1+j, 1+j);
+                        enemigo = enemyFactory.crearChief(150, 3, 5, 1, 1);
                         break;
                     case 2:
-                        enemigo = enemyFactory.crearWolf(1, 3+j, 1+j, 2+j, 5+j);
+                        enemigo = enemyFactory.crearWolf(200, 3, 1, 2, 5);
                         break;
                     case 3:
-                        enemigo = enemyFactory.crearRobot(1, 5+j, 1+j, 5+j, 1+j);
+                        enemigo = enemyFactory.crearRobot(300, 5, 1, 5, 1);
                         break;
                     default:
                         enemigo = null; //para que no salgan errores
@@ -145,6 +146,18 @@ public class Controlador {
                             pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
     
                             seleccionJugador = false;
+
+                            boolean estadoAplicado = estadoAplicado(jugador.getNPJ());
+                            if(estadoAplicado){
+                                switch(jugador.getNPJ()){
+                                    case 0:
+                                        break;
+                                    case 1:
+                                        break;
+                                    case 2:
+                                        break;
+                                }
+                            }
     
                         }else if(pantalla.getCurarse()){
 
@@ -254,5 +267,24 @@ public class Controlador {
         pantalla.animAttackPJ(false);
     }
 
+
+    public static boolean estadoAplicado(int Npersonaje){
+        int rand = (int) (Math.random()*10);
+        int probabilidad=0;
+        switch(Npersonaje){
+            case 0:
+                probabilidad = 2;
+                break;
+            case 1:
+                probabilidad = 4;
+                break;
+            case 2:
+                probabilidad = 5;
+                break;
+        }
+
+        return (rand <= probabilidad);
+
+    }
 }
 

@@ -57,7 +57,10 @@ public class Pantalla extends JFrame{
         new ImageIcon("resources//sprites//robot//impact.gif") 
     };
     private ImageIcon estadosAlterados[] = { //Cura, 
-        new ImageIcon("resources//sprites//estadosAlterados//cura.gif")
+        new ImageIcon("resources//sprites//estadosAlterados//cura.gif"),
+        new ImageIcon("resources//sprites//estadosAlterados//quemado.gif"),
+        new ImageIcon("resources//sprites//estadosAlterados//sangrado.gif"),
+        new ImageIcon("resources//sprites//estadosAlterados//electrocutado.gif")
     };
     //GUI
     private ImageIcon btt_inicio = new ImageIcon("resources//sprites//gui//btt_inicioR.png");
@@ -522,6 +525,24 @@ public class Pantalla extends JFrame{
             damage_enemigo.setIcon(null);
         }
      
+    }
+
+    public void efectoDeEstado(String estado){
+        damage_enemigo.setIcon(null);
+        switch(estado){
+            case "Quemado":
+                estadosAlterados[1].getImage().flush();
+                damage_enemigo.setIcon(estadosAlterados[1]);
+                break;
+            case "Sangrado":
+                estadosAlterados[2].getImage().flush();
+                damage_enemigo.setIcon(estadosAlterados[2]);
+                break;
+            case "Electrocutado":
+                estadosAlterados[3].getImage().flush();
+                damage_enemigo.setIcon(estadosAlterados[3]);
+                break;
+        }
     }
 
 } 
