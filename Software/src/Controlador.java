@@ -153,6 +153,7 @@ public class Controlador {
                                         efecto.setEstado( new EstadoSangrado(efecto));
                                         break;
                                     case 1:
+                                        System.out.println("HEY");
                                         efecto.setEstado( new EstadoQuemado(efecto));
                                         break;
                                     case 2:
