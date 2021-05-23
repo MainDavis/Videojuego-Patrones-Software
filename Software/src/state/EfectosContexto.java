@@ -19,7 +19,7 @@ public class EfectosContexto {
         estado.ejecutar(enemigo, pantalla);
     }
 
-    public void getTurnosRestantes(){
-        estado.getTurnosRestantes();
+    public int getTurnosRestantes(){
+        return estado.getTurnosRestantes();
     }
 }

@@ -12,6 +12,7 @@ import enemigos.Mapa2.EnemigosMapa2;
 import enemigos.Mapa3.EnemigosMapa3;
 import enemigos.Mapa4.EnemigosMapa4;
 import graficos.Pantalla;
+import state.*;
 import template.*;
 
 public class Controlador {
@@ -26,6 +27,8 @@ public class Controlador {
         CalcularDamage calculadora = CalcularDamage.instance();
         Contexto c = null;
         TemplateMethod template;
+
+        EfectosContexto efecto = new EfectosContexto();
 
         boolean seleccionJugador=false;
 
@@ -142,22 +145,25 @@ public class Controlador {
                             enemigo.recibirDamage(damage);
     
                             animAttackPJ(pantalla, jugador.getNPJ());
-    
-                            pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
-    
-                            seleccionJugador = false;
 
                             boolean estadoAplicado = estadoAplicado(jugador.getNPJ());
                             if(estadoAplicado){
                                 switch(jugador.getNPJ()){
                                     case 0:
+                                        efecto.setEstado( new EstadoSangrado(efecto));
                                         break;
                                     case 1:
+                                        efecto.setEstado( new EstadoQuemado(efecto));
                                         break;
                                     case 2:
+                                        efecto.setEstado( new EstadoElectrocutado(efecto));
                                         break;
                                 }
                             }
+
+                            pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
+    
+                            seleccionJugador = false;
     
                         }else if(pantalla.getCurarse()){
 
@@ -195,13 +201,14 @@ public class Controlador {
                         if(accion) template = new Atacar();//Ataca
                         else template = new Curar(); //Cura
 
-                        template.turnoEnemigo(jugador, newEstadisticas, enemigo, calculadora, pantalla, j);  
+                        template.turnoEnemigo(efecto, jugador, newEstadisticas, enemigo, calculadora, pantalla, j);  
 
                         pantalla.actualizarHP(jugador.getHP(), enemigo.getStats()[0]);
     
                     }
                 }
                 //Terminan los duelo
+                efecto.setEstado(new EstadoNinguno(efecto));
             }
 
 
