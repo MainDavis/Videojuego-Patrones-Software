@@ -188,7 +188,7 @@ public class Controlador {
                         //Dependiendo de la vida tomo una estrategia
                         int enemigoHPMax = enemigo.getStats()[5];
                         int enemigoHP = enemigo.getStats()[0];
-                        
+
                         if(enemigoHP == enemigoHPMax) c = new Contexto(new EstrategiaFullAtk());
                         else if( enemigoHP < enemigoHPMax  &&  enemigoHP >= enemigoHPMax/2) c = new Contexto(new EstrategiaAtaque());
                         else if( enemigoHP < enemigoHPMax && enemigoHP >= enemigoHPMax/4) c = new Contexto(new EstrategiaCura());
