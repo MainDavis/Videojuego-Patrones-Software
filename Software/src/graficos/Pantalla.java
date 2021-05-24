@@ -64,12 +64,15 @@ public class Pantalla extends JFrame{
         new ImageIcon("resources//sprites//estadosAlterados//electrocutado.gif")
     };
     //GUI
-    private ImageIcon btt_inicio = new ImageIcon("resources//sprites//gui//btt_inicioR.png");
+    private ImageIcon btt_inicio = new ImageIcon("resources//sprites//gui//btt_inicio.png");
     private ImageIcon char_stats_icon = new ImageIcon("resources//sprites//gui//char_stats.png");
     private ImageIcon btt_mas_icon = new ImageIcon("resources//sprites//gui//boton_mas_45.png");
     private ImageIcon btt_menos_icon = new ImageIcon("resources//sprites//gui//boton_menos_45.png");
     private ImageIcon btt_anterior_icon = new ImageIcon("resources//sprites//gui//btt_anterior.png");
     private ImageIcon btt_siguiente_icon = new ImageIcon("resources//sprites//gui//btt_siguiente.png");
+    private ImageIcon btt_atacar_icon = new ImageIcon("resources//sprites//gui//btt_atacar.png");
+    private ImageIcon btt_curar_icon = new ImageIcon("resources//sprites//gui//btt_curar.png");
+
     private JLabel pj; // <- Jugador
     private JLabel enemigo; // <- Enemigo
     private JLabel damage_pj, damage_enemigo;
@@ -113,7 +116,7 @@ public class Pantalla extends JFrame{
     public void pantallaInicio(){
         
         btt_start = new JButton();
-        btt_start.setBounds(500, 299, 294,102);
+        btt_start.setBounds(500, 299, 256, 126);
         btt_start.setIcon(btt_inicio);
         btt_start.setBorderPainted(false); 
         btt_start.setContentAreaFilled(false); 
@@ -367,10 +370,18 @@ public class Pantalla extends JFrame{
         damage_enemigo = new JLabel();
         damage_enemigo.setBounds(900,225,192,192);
         //Creo y pongo los botones
-        btt_atacar = new JButton("");
-        btt_atacar.setBounds(420, 500, 200, 100);
-        btt_curarse = new JButton("");
-        btt_curarse.setBounds(620, 500, 200, 100);
+        btt_atacar = new JButton();
+        btt_atacar.setBounds(350, 500, 256, 126);
+        btt_atacar.setBorder(null);
+        btt_atacar.setIcon(btt_atacar_icon);
+        btt_atacar.setContentAreaFilled(false);
+        
+
+        btt_curarse = new JButton();
+        btt_curarse.setBounds(650, 500, 256, 126);
+        btt_curarse.setIcon(btt_curar_icon);
+        btt_curarse.setBorder(null);
+        btt_curarse.setContentAreaFilled(false);
 
         //Creo las labels de la vida
         HP_Jugador = new JLabel("HP: ");

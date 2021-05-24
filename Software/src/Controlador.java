@@ -226,7 +226,6 @@ public class Controlador {
 
         }
 
-        System.out.println("La partida ha terminado");
         musica.ReproducirSonido("musicaFinal");
         pantalla.pantallaFinal(!jugador.muerto());
 

@@ -21,7 +21,6 @@ public class CalcularDamage {
         
         if( nRandom >= speed/2 ) {
             int finalDamage = (int) ( escaladoDamage*( Math.log(damage)/Math.log(15) )*( 1 - ( Math.log(defense)/Math.log(15) ) ) );
-            System.out.println("Final: " + finalDamage);
             return finalDamage;
         }
         return 0;        

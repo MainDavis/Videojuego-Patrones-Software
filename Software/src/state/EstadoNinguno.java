@@ -10,7 +10,6 @@ public class EstadoNinguno extends Estado{
     }
 
     public void ejecutar(Enemigo enemigo, Pantalla pantalla) {
-        System.out.println("NINGUNO");
         
     }
 
