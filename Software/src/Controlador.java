@@ -12,6 +12,7 @@ import enemigos.Mapa2.EnemigosMapa2;
 import enemigos.Mapa3.EnemigosMapa3;
 import enemigos.Mapa4.EnemigosMapa4;
 import graficos.Pantalla;
+import musica.Musica;
 import state.*;
 import template.*;
 
@@ -23,6 +24,8 @@ public class Controlador {
         //Creo los enemigos
         EnemyFactory enemyFactory = new EnemigosMapa1(); //Por defecto lo pongo a Mapa1
         Enemigo enemigo;
+
+        Musica musica = new Musica();
 
         CalcularDamage calculadora = CalcularDamage.instance();
         Contexto c = null;
@@ -38,6 +41,8 @@ public class Controlador {
         //Pantalla de inicio
         pantalla.pantallaInicio();
         
+        musica.ReproducirSonido("musicaInicio");
+
         //Espero a que pulse
         while(!pantalla.continuar()){
             try {
@@ -88,6 +93,7 @@ public class Controlador {
 
         //Combate
         pantalla.iniciaCombate();
+        musica.ReproducirSonido("musicaCombate");
 
         for(int i=0; i<4 && !jugador.muerto(); i++){
 
@@ -116,7 +122,7 @@ public class Controlador {
                 
                 switch(j){
                     case 0:
-                        enemigo = enemyFactory.crearSkeleton(100, 2, 1, 2, 2);
+                        enemigo = enemyFactory.crearSkeleton(100, 1, 1, 2, 2);
                         break;
                     case 1:
                         enemigo = enemyFactory.crearChief(150, 3, 5, 1, 1);
@@ -125,7 +131,7 @@ public class Controlador {
                         enemigo = enemyFactory.crearWolf(200, 3, 1, 2, 5);
                         break;
                     case 3:
-                        enemigo = enemyFactory.crearRobot(300, 5, 1, 5, 1);
+                        enemigo = enemyFactory.crearRobot(400, 5, 1, 5, 1);
                         break;
                     default:
                         enemigo = null; //para que no salgan errores
@@ -153,7 +159,6 @@ public class Controlador {
                                         efecto.setEstado( new EstadoSangrado(efecto));
                                         break;
                                     case 1:
-                                        System.out.println("HEY");
                                         efecto.setEstado( new EstadoQuemado(efecto));
                                         break;
                                     case 2:
@@ -222,6 +227,8 @@ public class Controlador {
         }
 
         System.out.println("La partida ha terminado");
+        musica.ReproducirSonido("musicaFinal");
+        pantalla.pantallaFinal(!jugador.muerto());
 
     }
 

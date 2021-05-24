@@ -16,11 +16,12 @@ public class Pantalla extends JFrame{
 
     //Backgrounds
     private ImageIcon backgrounds[] = {
-        new ImageIcon("resources//backgrounds//DarkSouls_epic.gif"),
-        new ImageIcon("resources//backgrounds//rio.gif"),
-        new ImageIcon("resources//backgrounds//ninja.gif"),
+        new ImageIcon("resources//backgrounds//catedral.gif"),
+        new ImageIcon("resources//backgrounds//city.gif"),
         new ImageIcon("resources//backgrounds//apocalipsis.gif"),
-        new ImageIcon("resources//backgrounds//DarkSouls_epic.gif")
+        new ImageIcon("resources//backgrounds//samurai.gif"),
+        new ImageIcon("resources//backgrounds//muerte.gif"),
+        new ImageIcon("resources//backgrounds//catedral.gif")
     };
     //Sprites
     private ImageIcon PJ_idle[] = { //Knight, Gunwoman, Wizard
@@ -65,12 +66,17 @@ public class Pantalla extends JFrame{
     //GUI
     private ImageIcon btt_inicio = new ImageIcon("resources//sprites//gui//btt_inicioR.png");
     private ImageIcon char_stats_icon = new ImageIcon("resources//sprites//gui//char_stats.png");
+    private ImageIcon btt_mas_icon = new ImageIcon("resources//sprites//gui//boton_mas_45.png");
+    private ImageIcon btt_menos_icon = new ImageIcon("resources//sprites//gui//boton_menos_45.png");
+    private ImageIcon btt_anterior_icon = new ImageIcon("resources//sprites//gui//btt_anterior.png");
+    private ImageIcon btt_siguiente_icon = new ImageIcon("resources//sprites//gui//btt_siguiente.png");
     private JLabel pj; // <- Jugador
     private JLabel enemigo; // <- Enemigo
     private JLabel damage_pj, damage_enemigo;
     private JLabel background;
     private JLabel char_stats; // <- UI Atributos
     private JLabel HP_Jugador, HP_Enemigo;
+    private JLabel victoria_derrota;
     //Atributos
     private JLabel lb_stats[] = new JLabel[5];
     //Botones
@@ -93,7 +99,7 @@ public class Pantalla extends JFrame{
     }
 
     private void configurarVentana(){
-        this.setTitle("Juegardo");
+        this.setTitle("RPG");
         this.setSize(1280,720);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
@@ -149,11 +155,15 @@ public class Pantalla extends JFrame{
             y+=35;
         }
         //Creo los nuevos botones
-        btt_siguiente = new JButton("Siguiente");
-        btt_siguiente.setBounds(900, 350, 150,50);
+        btt_siguiente = new JButton();
+        btt_siguiente.setIcon(btt_siguiente_icon);
+        btt_siguiente.setBorder(null);
+        btt_siguiente.setBounds(868, 340, 45, 45);
 
-        btt_anterior = new JButton("Anterior");
-        btt_anterior.setBounds(250, 350, 150,50);
+        btt_anterior = new JButton();
+        btt_anterior.setIcon(btt_anterior_icon);
+        btt_anterior.setBorder(null);
+        btt_anterior.setBounds(370, 340, 45, 45);
 
         btt_select = new JButton("Seleccionar");
         btt_select.setBounds(450, 415, 100,25);
@@ -201,12 +211,16 @@ public class Pantalla extends JFrame{
         int y=255;
         for(int i=0; i<5; i++){
             //Añadir
-            btt_atributos[i][0] = new JButton("+");
-            btt_atributos[i][0].setBounds(815, y, 45, 45);
+            btt_atributos[i][0] = new JButton();
+            btt_atributos[i][0].setIcon(btt_mas_icon);
+            btt_atributos[i][0].setBorder(null);
+            btt_atributos[i][0].setBounds(815, y, 40, 40);
             //Quitar
-            btt_atributos[i][1] = new JButton("-");
-            btt_atributos[i][1].setBounds(770, y, 45, 45);
-            y+=40;
+            btt_atributos[i][1] = new JButton();
+            btt_atributos[i][1].setIcon(btt_menos_icon);
+            btt_atributos[i][1].setBorder(null);
+            btt_atributos[i][1].setBounds(770, y, 40, 40);
+            y+=42;
         }
         //Añado los eventos de los botones
         //No puedo con un for -_-
@@ -307,6 +321,7 @@ public class Pantalla extends JFrame{
         });
        
         //Modifico el botón de seleccionar
+        btt_select.setBorder(null);
         btt_select.setEnabled(false);
         btt_select.setText("Tienes 5");
 
@@ -352,9 +367,9 @@ public class Pantalla extends JFrame{
         damage_enemigo = new JLabel();
         damage_enemigo.setBounds(900,225,192,192);
         //Creo y pongo los botones
-        btt_atacar = new JButton("ARRANCAR CABEZA");
+        btt_atacar = new JButton("");
         btt_atacar.setBounds(420, 500, 200, 100);
-        btt_curarse = new JButton("BEBER LA SANGRE DE TUS ENEMIGOS");
+        btt_curarse = new JButton("");
         btt_curarse.setBounds(620, 500, 200, 100);
 
         //Creo las labels de la vida
@@ -392,6 +407,34 @@ public class Pantalla extends JFrame{
         this.add(background);
     }
 
+
+    public void pantallaFinal(boolean victoria){
+        remove(damage_pj);
+        remove(damage_enemigo);
+        remove(btt_atacar);
+        remove(btt_curarse);
+        remove(HP_Jugador);
+        remove(HP_Enemigo);
+        remove(pj);
+        remove(enemigo);
+
+        background.setIcon(backgrounds[0]);
+
+        victoria_derrota = new JLabel();
+        victoria_derrota.setBounds(400, 200, 500, 200);
+        victoria_derrota.setFont(new Font("Serif", Font.BOLD, 72));
+        victoria_derrota.setForeground(Color.white); 
+
+        if(victoria){
+            victoria_derrota.setText("VICTORIA"); 
+                      
+        }else{
+            victoria_derrota.setText("DERROTA");  
+        }
+
+        this.add(victoria_derrota);
+        this.add(background);
+    }
 
     public boolean continuar(){
         if(continuar){
