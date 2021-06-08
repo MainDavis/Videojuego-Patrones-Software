@@ -1,4 +1,4 @@
-# Integrantes del grupo:
+# Integrantes del grupo
 * Alejandro Garcia
 * David Villaverde
 * Hugo Roman
