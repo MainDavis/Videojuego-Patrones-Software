@@ -1,4 +1,4 @@
-package template;
+package Template;
 
 import Calculadora.CalcularDamage;
 import Decorator.Estadisticas;

@@ -1,20 +1,30 @@
 import java.util.Random;
-
+import Template.TemplateMethod;
+import graficos.Pantalla;
+import enemigos.EnemyFactory;
+import enemigos.Estrategia.Contexto;
+import enemigos.Estrategia.EstrategiaAtaque;
+import enemigos.Estrategia.EstrategiaCura;
+import enemigos.Estrategia.EstrategiaFullAtk;
+import enemigos.Estrategia.EstrategiaFullCura;
+import enemigos.Enemigo;
 import Calculadora.CalcularDamage;
 import Decorator.EstadisticasBase;
 import Decorator.NewEstadisticas;
 import Jugador.Jugador;
-import enemigos.Enemigo;
-import enemigos.EnemyFactory;
-import enemigos.Estrategia.*;
+import musica.Musica;
+import state.EfectosContexto;
+import state.EstadoElectrocutado;
+import state.EstadoNinguno;
+import state.EstadoQuemado;
+import state.EstadoSangrado;
+import Template.Atacar;
+import Template.Curar;
 import enemigos.Mapa1.EnemigosMapa1;
 import enemigos.Mapa2.EnemigosMapa2;
 import enemigos.Mapa3.EnemigosMapa3;
 import enemigos.Mapa4.EnemigosMapa4;
-import graficos.Pantalla;
-import musica.Musica;
-import state.*;
-import template.*;
+
 
 public class Controlador {
     
